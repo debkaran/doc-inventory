@@ -1,3 +1,5 @@
 /org.eclipse.ltk.core.refactoring.prefs
 .classpath
 .settings/
+/org.eclipse.jdt.core.prefs
+/org.eclipse.wst.common.project.facet.core.xml
