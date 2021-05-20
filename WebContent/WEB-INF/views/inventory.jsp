@@ -749,8 +749,7 @@
 
 								<div class="info-box-content">
 									<span class="info-box-number"><i
-										class="fas fa-cloud-download-alt"></i> &nbsp;41,410 files in
-										Shared</span>
+										class="fas fa-share-alt"></i> &nbsp;41,410 files in Shared</span>
 
 									<div class="info-box-number"
 										style="margin-top: inherit; font-weight: lighter; line-height: 1.3;">
@@ -758,8 +757,8 @@
 											at 9:00 pm</span>
 									</div>
 									<div class="dropdown-divider"></div>
-									<span class="info-box-number"><i
-										class="fas fa-trash-alt"></i> &nbsp;210 files is Favourite</span>
+									<span class="info-box-number"><i class="fas fa-heart"></i>
+										&nbsp;210 files is Favourite</span>
 
 									<div class="info-box-number"
 										style="margin-top: inherit; font-weight: lighter; line-height: 1.3;">
@@ -812,10 +811,19 @@
 											<i class="far fa-trash-alt"></i>
 										</button>
 										<button type="button" class="btn btn-default btn-sm">
-											<i class="fas fa-reply"></i>
+											<i class="fas fa-download"></i>
 										</button>
 										<button type="button" class="btn btn-default btn-sm">
-											<i class="fas fa-share"></i>
+											<i class="fas fa-share-alt"></i>
+										</button>
+										<button type="button" class="btn btn-default btn-sm">
+											<i class="fas fa-thumbtack"></i>
+										</button>
+										<button type="button" class="btn btn-default btn-sm">
+											<i class="fas fa-arrows-alt"></i>
+										</button>
+										<button type="button" class="btn btn-default btn-sm">
+											<i class="far fa-clone"></i>
 										</button>
 									</div>
 									<!-- /.btn-group -->
@@ -826,6 +834,18 @@
 								<div class="table-responsive mailbox-messages"
 									style="position: relative; max-height: 700px; overflow: auto; display: block;">
 									<table class="table table-hover table-head-fixed">
+										<thead>
+											<tr>
+												<th>&nbsp;</th>
+												<th>&nbsp;</th>
+												<th>Name</th>
+												<th>Size</th>
+												<th>Type</th>
+												<th>Created</th>
+												<th>Created By</th>
+												<th>&nbsp;</th>
+											</tr>
+										</thead>
 										<tbody>
 											<tr>
 												<td>
@@ -835,13 +855,17 @@
 													</div>
 												</td>
 												<td class="mailbox-star"><a href="#"><i
-														class="fas fa-star text-warning"></i></a></td>
-												<td class="mailbox-name"><a href="read-mail.html">Alexander
-														Pierce</a></td>
-												<td class="mailbox-subject"><b>AdminLTE 3.0 Issue</b> -
-													Trying to find a solution to this problem...</td>
-												<td class="mailbox-attachment"></td>
-												<td class="mailbox-date">5 mins ago</td>
+														class="fas fa-heart text-info"></i></a></td>
+												<td class="mailbox-name"><a href="read-mail.html">
+														<img alt="Folder"
+														src="./resources/icons/windows10_icons/imageres_115.ico"
+														width="40" height="40">&nbsp;&nbsp;Alexander Pierce
+												</a></td>
+												<td class="mailbox-subject">10.72 KB</td>
+												<td class="mailbox-attachment">Folder</td>
+												<td class="mailbox-date">5 min(s) ago</td>
+												<td>You</td>
+												<td><a href="#"><i class="fas fa-bars"></i></a></td>
 											</tr>
 											<tr>
 												<td>
@@ -851,14 +875,17 @@
 													</div>
 												</td>
 												<td class="mailbox-star"><a href="#"><i
-														class="fas fa-star-o text-warning"></i></a></td>
-												<td class="mailbox-name"><a href="read-mail.html">Alexander
-														Pierce</a></td>
-												<td class="mailbox-subject"><b>AdminLTE 3.0 Issue</b> -
-													Trying to find a solution to this problem...</td>
-												<td class="mailbox-attachment"><i
-													class="fas fa-paperclip"></i></td>
-												<td class="mailbox-date">28 mins ago</td>
+														class="far fa-heart text-info"></i></a></td>
+												<td class="mailbox-name"><a href="read-mail.html">
+														<img alt="Folder"
+														src="./resources/icons/windows10_icons/shell32_264.ico"
+														width="40" height="40">&nbsp;&nbsp;Alexander Pierce
+												</a></td>
+												<td class="mailbox-subject">10 MB</td>
+												<td class="mailbox-attachment">Folder</td>
+												<td class="mailbox-date">28 Hour(s) ago</td>
+												<td>Tamal Nayak</td>
+												<td><a href="#"><i class="fas fa-bars"></i></i></a></td>
 											</tr>
 											<tr>
 												<td>
@@ -868,14 +895,17 @@
 													</div>
 												</td>
 												<td class="mailbox-star"><a href="#"><i
-														class="fas fa-star-o text-warning"></i></a></td>
-												<td class="mailbox-name"><a href="read-mail.html">Alexander
-														Pierce</a></td>
-												<td class="mailbox-subject"><b>AdminLTE 3.0 Issue</b> -
-													Trying to find a solution to this problem...</td>
-												<td class="mailbox-attachment"><i
-													class="fas fa-paperclip"></i></td>
-												<td class="mailbox-date">11 hours ago</td>
+														class="far fa-heart text-info"></i></a></td>
+												<td class="mailbox-name"><a href="read-mail.html">
+														<img alt="Folder"
+														src="./resources/icons/windows10_icons/imageres_102.ico"
+														width="40" height="40">&nbsp;&nbsp;Alexander Pierce
+												</a></td>
+												<td class="mailbox-subject">150 KB</td>
+												<td class="mailbox-attachment">Text</td>
+												<td class="mailbox-date">2021/2/18, 8:33 PM</td>
+												<td>You</td>
+												<td><a href="#"><i class="fas fa-bars"></i></a></td>
 											</tr>
 										</tbody>
 									</table>
@@ -891,47 +921,50 @@
 										class="btn btn-default btn-sm checkbox-toggle">
 										<i class="far fa-square"></i>
 									</button>
-									<div class="btn-group">
-										<button type="button" class="btn btn-default btn-sm">
-											<i class="far fa-trash-alt"></i>
-										</button>
-										<button type="button" class="btn btn-default btn-sm">
-											<i class="fas fa-reply"></i>
-										</button>
-										<button type="button" class="btn btn-default btn-sm">
-											<i class="fas fa-share"></i>
-										</button>
-									</div>
+									<button type="button" class="btn btn-default btn-sm">
+										<i class="far fa-trash-alt"></i>
+									</button>
+									<button type="button" class="btn btn-default btn-sm">
+										<i class="fas fa-download"></i>
+									</button>
+									<button type="button" class="btn btn-default btn-sm">
+										<i class="fas fa-share-alt"></i>
+									</button>
+									<button type="button" class="btn btn-default btn-sm">
+										<i class="fas fa-thumbtack"></i>
+									</button>
+									<button type="button" class="btn btn-default btn-sm">
+										<i class="fas fa-arrows-alt"></i>
+									</button>
+									<button type="button" class="btn btn-default btn-sm">
+										<i class="far fa-clone"></i>
+									</button>
+							
 									<!-- /.btn-group -->
 									<button type="button" class="btn btn-default btn-sm">
 										<i class="fas fa-sync-alt"></i>
 									</button>
-								</div>
-							</div>
+								
 						</div>
-						<!-- /.card -->
 					</div>
-					<!-- /.col -->
+					<!-- /.card -->
 				</div>
-			</section>
-
+				<!-- /.col -->
 		</div>
-		<!-- /.content-wrapper -->
+		</section>
 
-		<footer class="main-footer">
-			<div class="float-right d-none d-sm-block">
-				<b>Version</b> 3.1.0
-			</div>
-			<strong>Copyright &copy; 2014-2021 <a
-				href="https://adminlte.io">AdminLTE.io</a>.
-			</strong> All rights reserved.
-		</footer>
+	</div>
+	<!-- /.content-wrapper -->
 
-		<!-- Control Sidebar -->
-		<aside class="control-sidebar control-sidebar-dark">
-			<!-- Control sidebar content goes here -->
-		</aside>
-		<!-- /.control-sidebar -->
+	<footer class="main-footer">
+		<strong>3 File(s) selected</strong>
+	</footer>
+
+	<!-- Control Sidebar -->
+	<aside class="control-sidebar control-sidebar-dark">
+		<!-- Control sidebar content goes here -->
+	</aside>
+	<!-- /.control-sidebar -->
 	</div>
 	<!-- ./wrapper -->
 
