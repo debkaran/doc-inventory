@@ -1,10 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <div class="mailbox-controls">
-	<!-- Check all button -->
-	<button type="button" class="btn btn-default btn-sm checkbox-toggle">
-		<i class="far fa-square"></i>
-	</button>
+	
 	<button type="button" class="btn btn-default btn-sm">
 		<i class="far fa-trash-alt"></i>
 	</button>
