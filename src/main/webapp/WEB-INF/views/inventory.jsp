@@ -84,9 +84,7 @@
 												<td class="mailbox-attachment">Folder</td>
 												<td class="mailbox-date">5 min(s) ago</td>
 												<td>You</td>
-												<td>
-													<jsp:include page="file-action-menu.jsp" />
-												</td>
+												<td><jsp:include page="file-action-menu.jsp" /></td>
 											</tr>
 											<tr>
 												<td style="padding-left: 27px;">
