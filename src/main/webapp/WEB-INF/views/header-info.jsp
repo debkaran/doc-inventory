@@ -178,8 +178,10 @@
 
 		// Set how to handle the response text from the server
 		xhr.onreadystatechange = function(ev) {
-			console.debug(xhr.responseText);
-			$("#folderSubmitOnUpload").prop("disabled", false);
+			if (this.readyState == 4 && this.status == 200) {
+				console.debug(xhr.responseText);
+				$("#folderSubmitOnUpload").prop("disabled", false);
+			}
 		};
 
 		for (let i = 0; i < files.length; i++) {
