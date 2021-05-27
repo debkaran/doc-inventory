@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	<script src="./resources/dropzone/dist/min/dropzone.min.js"></script>
+<link rel="stylesheet"
+	href="./resources/dropzone/dist/min/dropzone.min.css">
 <div class="modal fade bd-example-modal-xl" id="file-upload-modal">
 	<div class="modal-dialog modal-xl modal-dialog-scrollable">
 		<div class="modal-content">

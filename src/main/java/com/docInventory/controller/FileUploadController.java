@@ -24,7 +24,7 @@ import com.google.gson.Gson;
  */
 @WebServlet("/file-upload")
 @MultipartConfig
-public class FileUpload extends HttpServlet {
+public class FileUploadController extends HttpServlet {
 	private final Gson gson = new Gson();
 	private static final long serialVersionUID = 1L;
 	private final UploadService uploadService = new UploadServiceImpl();

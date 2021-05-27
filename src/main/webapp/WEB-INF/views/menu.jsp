@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	
+	<% String pageTitle = request.getParameter("pageTitle");  %>
 <!-- Navbar -->
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
 	<!-- Left navbar links -->
@@ -8,7 +10,7 @@
 			href="#" role="button"><i class="fas fa-bars"></i></a></li>
 		<li class="nav-item d-none d-sm-inline-block"
 			style="font-size: x-large;"><a href="index3.html"
-			class="nav-link" style="top: -7px;">All Files</a></li>
+			class="nav-link" style="top: -7px;"><%=pageTitle %></a></li>
 	</ul>
 
 	<!-- Right navbar links -->
@@ -183,32 +185,60 @@
 				data-widget="treeview" role="menu" data-accordion="false">
 				<!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-				<li class="nav-item"><a href="pages/gallery.html"
+				<li class="nav-item"><a href="./"
+				<% if(pageTitle != null && pageTitle.equals("Home")){ %>
+					class="nav-link active"> <i class="fas fa-laptop-house"></i>
+				<% } else{ %>
 					class="nav-link"> <i class="fas fa-laptop-house"></i>
+				<% } %>
 						<p>Home</p>
 				</a></li>
-				<li class="nav-item"><a href="pages/gallery.html"
+				<li class="nav-item"><a href="./inventory"
+				<% if(pageTitle != null && pageTitle.equals("All Files")){ %>
 					class="nav-link active"> <i class="fas fa-folder-open"></i>
+				<% } else{ %>
+					class="nav-link"> <i class="fas fa-folder-open"></i>
+				<% } %>
 						<p>All Files</p>
 				</a></li>
 				<li class="nav-item"><a href="pages/gallery.html"
+				<% if(pageTitle != null && pageTitle.equals("Deleted Files")){ %>
+					class="nav-link active"> <i class="fas fa-trash"></i>
+				<% } else{ %>
 					class="nav-link"> <i class="fas fa-trash"></i>
+				<% } %>
 						<p>Deleted Files</p>
 				</a></li>
 				<li class="nav-item"><a href="pages/gallery.html"
+				<% if(pageTitle != null && pageTitle.equals("Favorites")){ %>
+					class="nav-link active"> <i class="far fa-heart"></i>
+				<% } else{ %>
 					class="nav-link"> <i class="far fa-heart"></i>
-						<p>Favourites</p>
+				<% } %>
+						<p>Favorites</p>
 				</a></li>
 				<li class="nav-item"><a href="pages/gallery.html"
+				<% if(pageTitle != null && pageTitle.equals("History")){ %>
+					class="nav-link active"> <i class="fas fa-history"></i>
+				<% } else{ %>
 					class="nav-link"> <i class="fas fa-history"></i>
+				<% } %>
 						<p>History</p>
 				</a></li>
 				<li class="nav-item"><a href="pages/gallery.html"
+				<% if(pageTitle != null && pageTitle.equals("Recents")){ %>
+					class="nav-link active"> <i class="fas fa-user-clock"></i>
+				<% } else{ %>
 					class="nav-link"> <i class="fas fa-user-clock"></i>
+				<% } %>
 						<p>Recents</p>
 				</a></li>
 				<li class="nav-item"><a href="pages/gallery.html"
+				<% if(pageTitle != null && pageTitle.equals("Shared Files")){ %>
 					class="nav-link"> <i class="fab fa-slideshare"></i>
+				<% } else{ %>
+					class="nav-link"> <i class="fab fa-slideshare"></i>
+				<% } %>
 						<p>Shared Files</p>
 				</a></li>
 

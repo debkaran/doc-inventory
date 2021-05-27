@@ -9,12 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/inventory")
-public class Inventory extends HttpServlet {
+@WebServlet("/login")
+public class LoginController extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/views/inventory.jsp");
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/views/login.jsp");
 		requestDispatcher.forward(request, response);
 	}
 
