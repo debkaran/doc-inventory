@@ -9,14 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/")
-public class HomeController extends HttpServlet {
-
+@WebServlet("/inventory")
+public class InventoryController extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/views/home.jsp");
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/views/inventory.jsp");
 		requestDispatcher.forward(request, response);
 	}
+
+
 }

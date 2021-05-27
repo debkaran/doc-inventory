@@ -1,7 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <div class="mailbox-controls">
-	
+	<%
+	String position = request.getParameter("position");
+	if (position.equals("header")) {
+	%>
+	<button type="button" class="btn btn-default btn-sm">
+		<i class="far fa-plus-square" data-toggle="dropdown"></i>
+		<div class="dropdown-menu dropdown-menu-left" role="menu">
+			<a class="dropdown-item" href="#" data-toggle="modal"
+				data-target="#file-upload-modal">Upload File</a> <a
+				class="dropdown-item" href="#" data-toggle="modal"
+				data-target="#folder-upload-modal">Upload Folder</a>
+			<div class="dropdown-divider"></div>
+			<a class="dropdown-item" href="#">Create Folder</a>
+		</div>
+	</button>
+	<%
+	}
+	%>
 	<button type="button" class="btn btn-default btn-sm">
 		<i class="far fa-trash-alt"></i>
 	</button>
