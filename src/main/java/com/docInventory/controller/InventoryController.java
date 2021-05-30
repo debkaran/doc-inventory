@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/inventory")
+import com.docInventory.constants.URIConstant;
+
+@WebServlet(URIConstant.INVENTORY)
 public class InventoryController extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
