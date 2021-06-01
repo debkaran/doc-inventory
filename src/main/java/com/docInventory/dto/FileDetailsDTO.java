@@ -2,7 +2,7 @@ package com.docInventory.dto;
 
 import com.docInventory.constants.FileType;
 
-public class FileDetails {
+public class FileDetailsDTO {
 	private String filename;
 	private Long filesize;
 	private String fileFullyQualifiedPath;
