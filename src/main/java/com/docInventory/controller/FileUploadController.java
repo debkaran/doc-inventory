@@ -14,15 +14,13 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.tomcat.util.http.fileupload.FileUploadException;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
-import com.docInventory.dto.FileDetails;
+import com.docInventory.constants.URIConstant;
+import com.docInventory.dto.FileDetailsDTO;
 import com.docInventory.service.UploadService;
 import com.docInventory.service.impl.UploadServiceImpl;
 import com.google.gson.Gson;
 
-/**
- * Servlet implementation class FileUpload
- */
-@WebServlet("/file-upload")
+@WebServlet(URIConstant.FILE_UPLOAD)
 @MultipartConfig
 public class FileUploadController extends HttpServlet {
 	private final Gson gson = new Gson();
@@ -38,7 +36,7 @@ public class FileUploadController extends HttpServlet {
 		PrintWriter writer = response.getWriter();
 		try {
 			String userid = "2";
-			List<FileDetails> fileDetails = uploadService.upload(userid, request, response);
+			List<FileDetailsDTO> fileDetails = uploadService.upload(userid, request, response);
 
 			String employeeJsonString = this.gson.toJson(fileDetails);
 			response.setContentType("application/json");

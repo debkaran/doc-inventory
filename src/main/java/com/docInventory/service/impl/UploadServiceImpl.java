@@ -14,12 +14,12 @@ import javax.servlet.http.Part;
 
 import com.docInventory.constants.FileType;
 import com.docInventory.constants.VMArgumentConstant;
-import com.docInventory.dto.FileDetails;
+import com.docInventory.dto.FileDetailsDTO;
 import com.docInventory.service.UploadService;
 
 public class UploadServiceImpl implements UploadService {
 
-	public List<FileDetails> upload(String userid, HttpServletRequest request, HttpServletResponse response)
+	public List<FileDetailsDTO> upload(String userid, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		String directoryRootPath = request.getParameter("path");
 		String relativeUplodedPath = directoryRootPath;
@@ -33,7 +33,7 @@ public class UploadServiceImpl implements UploadService {
 				return String.join(File.separator, splitArr);
 			}).toArray(String[]::new);
 		}
-		List<FileDetails> fileDetails = new ArrayList<>();
+		List<FileDetailsDTO> fileDetails = new ArrayList<>();
 		List<Part> fileParts = request.getParts().stream().filter(part -> "file".equals(part.getName()))
 				.collect(Collectors.toList());
 
@@ -49,7 +49,7 @@ public class UploadServiceImpl implements UploadService {
 		for (int i = 0; i < fileParts.size(); i++) {
 			String dir = "";
 			Part filePart = fileParts.get(i);
-			FileDetails fileDetail = new FileDetails();
+			FileDetailsDTO fileDetail = new FileDetailsDTO();
 			if (dirArr != null) {
 				dir = dirArr[i];
 				fileSaveDir = new File(uploadFilePath + File.separator + dir);
