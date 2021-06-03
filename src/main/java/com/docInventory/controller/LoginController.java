@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.docInventory.constants.URIConstant;
 import com.docInventory.dto.UserDTO;
+import com.docInventory.jdbc.util.HikariCPDataSourceManager;
 import com.docInventory.service.impl.LoginService;
-import com.docInventory.util.HikariCPDataSourceManager;
 
 @WebServlet(URIConstant.LOGIN)
 public class LoginController extends HttpServlet {

@@ -5,4 +5,5 @@ public interface URIConstant {
 	String FILE_UPLOAD = "/file-upload";
 	String HOME = "/home";
 	String INVENTORY = "/inventory";
+	String REGISTRATION = "/registration";
 }

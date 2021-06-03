@@ -1,4 +1,4 @@
-package com.docInventory.dto;
+package com.docInventory.jdbc.dto;
 
 public class UpdateQueryDTO {
 	private Integer noOfRowEffected;

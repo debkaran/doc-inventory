@@ -1,4 +1,4 @@
-package com.docInventory.util;
+package com.docInventory.jdbc.util;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,8 +7,8 @@ import java.sql.SQLException;
 
 public abstract class SelectQueryManager<T> extends JDBCQueryManager{
 
-	public SelectQueryManager(String query, Object... params) {
-		super(query, params);
+	public SelectQueryManager(String query) {
+		super(query);
 	}
 
 	public final T getResultFromSelection() throws SQLException {

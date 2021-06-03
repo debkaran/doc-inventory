@@ -20,6 +20,7 @@ import com.docInventory.dto.UserDTO;
 @WebFilter("/authenticationFilter")
 public class AuthenticationFilter implements Filter {
 	private ServletContext context;
+	private final String[] whiteListedPage = new String[] { URIConstant.LOGIN };
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
@@ -30,13 +31,12 @@ public class AuthenticationFilter implements Filter {
 		this.context.log("Requested Resource::" + uri);
 
 		HttpSession session = req.getSession(false);
-		String[] whiteListedUrl = new String[] { URIConstant.LOGIN };
 		
 		String contextPath = req.getContextPath();
 		if(uri.matches(contextPath+"/resources/*.*")) {
 			chain.doFilter(request, response);
 		} else {
-			boolean checkIfUrlEndWithAnyArrayElement = checkIfUrlEndWithAnyArrayElement(uri, contextPath, whiteListedUrl);
+			boolean checkIfUrlEndWithAnyArrayElement = checkIfUrlEndWithAnyArrayElement(uri, contextPath, this.whiteListedPage);
 			if (checkIfUrlEndWithAnyArrayElement) {
 				chain.doFilter(request, response);
 			} else if(session == null && !checkIfUrlEndWithAnyArrayElement){
