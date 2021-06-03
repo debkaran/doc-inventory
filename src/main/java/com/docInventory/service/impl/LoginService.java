@@ -11,7 +11,7 @@ public class LoginService {
 		UserDTO user = null;
 		
 		String query = "select * from user_details where email = ? AND password = ?";
-		SelectQueryManager<UserDTO> queryManager = new SelectQueryManager<>(query) {
+		SelectQueryManager<UserDTO> queryManager = new SelectQueryManager<UserDTO>(query) {
 			@Override
 			protected UserDTO prepareData(ResultSet rs) throws SQLException {
 				UserDTO user = null;

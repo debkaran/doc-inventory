@@ -20,7 +20,7 @@ import com.docInventory.dto.UserDTO;
 @WebFilter("/authenticationFilter")
 public class AuthenticationFilter implements Filter {
 	private ServletContext context;
-	private final String[] whiteListedPage = new String[] { URIConstant.LOGIN };
+	private final String[] whiteListedPage = new String[] { URIConstant.LOGIN, URIConstant.REGISTRATION };
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
