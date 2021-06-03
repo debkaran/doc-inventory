@@ -185,7 +185,7 @@
 				data-widget="treeview" role="menu" data-accordion="false">
 				<!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-				<li class="nav-item"><a href="./"
+				<li class="nav-item"><a href="./home"
 				<% if(pageTitle != null && pageTitle.equals("Home")){ %>
 					class="nav-link active"> <i class="fas fa-laptop-house"></i>
 				<% } else{ %>
