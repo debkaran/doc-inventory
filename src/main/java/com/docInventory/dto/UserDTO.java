@@ -6,12 +6,15 @@ public class UserDTO {
 	private Integer id;
 	private String name;
 	private String email;
+	private String password;
+	private String confirmPassword;
 	private String role;
 	private String profilePicture;
 	private Float storageSpace;
 	private Date dateOfBirth;
 	private Date createdDate;
 	private Date lastLoginTime;
+	private String agree;
 
 	public Integer getId() {
 		return id;
@@ -35,6 +38,14 @@ public class UserDTO {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getRole() {
@@ -83,5 +94,21 @@ public class UserDTO {
 
 	public void setLastLoginTime(Date lastLoginTime) {
 		this.lastLoginTime = lastLoginTime;
+	}
+
+	public String getAgree() {
+		return agree;
+	}
+
+	public void setAgree(String agree) {
+		this.agree = agree;
+	}
+
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
 	}
 }
