@@ -51,7 +51,7 @@
 							<%
 							  String error = (String) request.getAttribute("errorMessage");
 							  if(error != null){
-								  out.println(error);
+								  out.println("<span style=\"color:red\">* " + error + "</span>");
 							  }
 							%>
 						</div>
