@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.docInventory.constants.FormatConstant;
 import com.docInventory.constants.URIConstant;
 import com.docInventory.dto.UserDTO;
 import com.docInventory.service.impl.UserRegistrationService;
@@ -23,9 +24,10 @@ public class RegistrationController extends HttpServlet {
 	private UserRegistrationService registrationService = new UserRegistrationService();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/views/registration.jsp");
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/views/jsps/registration.jsp");
 		requestDispatcher.forward(request, response);
 	}
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		String name = request.getParameter("fullname");
 		String email = request.getParameter("email");
@@ -34,7 +36,7 @@ public class RegistrationController extends HttpServlet {
 		String dateOfBirth = request.getParameter("dateOfBirth");
 		String agree = request.getParameter("terms");
 		
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat format = new SimpleDateFormat(FormatConstant.INPUT_DATE_FORMAT);
 		try {
 			Date dob = format.parse(dateOfBirth);
 			UserDTO user = new UserDTO();
@@ -47,9 +49,12 @@ public class RegistrationController extends HttpServlet {
 			registrationService.registration(user);
 		} catch (ParseException e) {
 			e.printStackTrace();
+			request.setAttribute("errorMsg", "Invalid date format, please maintain " + FormatConstant.INPUT_DATE_FORMAT + " format");
+		} catch (IllegalArgumentException e) {
+			request.setAttribute("errorMsg", e.getMessage());
 		}
 		
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/views/registration.jsp");
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/views/jsps/registration.jsp");
 		requestDispatcher.forward(request, response);
 	}
 }
