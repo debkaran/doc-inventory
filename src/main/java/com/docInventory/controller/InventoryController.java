@@ -16,7 +16,7 @@ public class InventoryController extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/views/inventory.jsp");
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/views/jsps/inventory.jsp");
 		requestDispatcher.forward(request, response);
 	}
 

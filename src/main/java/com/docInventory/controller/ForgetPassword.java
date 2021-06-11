@@ -17,12 +17,12 @@ public class ForgetPassword extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/views/forget-password.jsp");
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/views/jsps/forget-password.jsp");
 		requestDispatcher.forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/views/email-otp.jsp");
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/views/jsps/email-otp.jsp");
 		requestDispatcher.forward(request, response);
 	}
 }

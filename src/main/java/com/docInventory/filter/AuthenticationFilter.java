@@ -20,7 +20,8 @@ import com.docInventory.dto.UserDTO;
 @WebFilter("/authenticationFilter")
 public class AuthenticationFilter implements Filter {
 	private ServletContext context;
-	private final String[] whiteListedPage = new String[] { URIConstant.LOGIN, URIConstant.REGISTRATION, URIConstant.FORGET_PASSWORD, URIConstant.RECOVER_PASSWORD};
+	private final String[] whiteListedPage = new String[] { URIConstant.LOGIN, URIConstant.REGISTRATION,
+			URIConstant.FORGET_PASSWORD, URIConstant.RECOVER_PASSWORD };
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
@@ -31,33 +32,34 @@ public class AuthenticationFilter implements Filter {
 		this.context.log("Requested Resource::" + uri);
 
 		HttpSession session = req.getSession(false);
-		
+
 		String contextPath = req.getContextPath();
-		if(uri.matches(contextPath+"/resources/*.*")) {
+		if (uri.matches(contextPath + "/resources/*.*")) {
 			chain.doFilter(request, response);
 		} else {
-			boolean checkIfUrlEndWithAnyArrayElement = checkIfUrlEndWithAnyArrayElement(uri, contextPath, this.whiteListedPage);
+			boolean checkIfUrlEndWithAnyArrayElement = checkIfUrlEndWithAnyArrayElement(uri, contextPath,
+					this.whiteListedPage);
 			if (checkIfUrlEndWithAnyArrayElement) {
 				chain.doFilter(request, response);
-			} else if(session == null && !checkIfUrlEndWithAnyArrayElement){
-				res.sendRedirect("."+URIConstant.LOGIN);
-			}else {
+			} else if (session == null && !checkIfUrlEndWithAnyArrayElement) {
+				res.sendRedirect("." + URIConstant.LOGIN);
+			} else {
 				UserDTO user = (UserDTO) session.getAttribute("user");
-				if(user == null) {
+				if (user == null) {
 					session.removeAttribute("user");
-					res.sendRedirect("."+URIConstant.LOGIN);
+					res.sendRedirect("." + URIConstant.LOGIN);
 				} else {
 					chain.doFilter(request, response);
 				}
 			}
 		}
 	}
-	
+
 	private boolean checkIfUrlEndWithAnyArrayElement(String uri, String contextPath, String[] urlPatterns) {
 		boolean isMatch = false;
-		for (int i=0; i < urlPatterns.length && isMatch == false; i++) {
+		for (int i = 0; i < urlPatterns.length && isMatch == false; i++) {
 			String urlPattern = urlPatterns[i];
-			isMatch = uri.equals(contextPath+urlPattern);
+			isMatch = uri.equals(contextPath + urlPattern);
 		}
 		return isMatch;
 	}
