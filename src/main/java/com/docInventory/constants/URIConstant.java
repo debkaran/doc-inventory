@@ -6,4 +6,6 @@ public interface URIConstant {
 	String HOME = "/home";
 	String INVENTORY = "/inventory";
 	String REGISTRATION = "/registration";
+	String FORGET_PASSWORD = "/forget-password";
+	String RECOVER_PASSWORD = "/recover-password";
 }
