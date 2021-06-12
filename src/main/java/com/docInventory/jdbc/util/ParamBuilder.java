@@ -51,6 +51,12 @@ public class ParamBuilder {
 		params.add(paramDTO);
 		return this;
 	}
+	
+	public ParamBuilder setParam(Boolean param) {
+		SqlParamDTO paramDTO = new SqlParamDTO("Boolean", param);
+		params.add(paramDTO);
+		return this;
+	}
 
 	public ParamBuilder setParam(Date param) {
 		SqlParamDTO paramDTO = new SqlParamDTO("Date", param);

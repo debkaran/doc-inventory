@@ -10,12 +10,13 @@ public class LoginService {
 	public UserDTO getUserDetailsByEmailidPassword(String email, String password) {
 		UserDTO user = null;
 		
-		String query = "select * from user_details where email = ? AND password = ?";
+		String query = "select * from user_details where email = ?";
 		SelectQueryManager<UserDTO> queryManager = new SelectQueryManager<UserDTO>(query) {
 			@Override
 			protected UserDTO prepareData(ResultSet rs) throws SQLException {
 				UserDTO user = null;
 				if (rs.next()) {
+					
 					user = new UserDTO();
 					user.setName(rs.getString("name"));
 					user.setRole(rs.getString("role"));
