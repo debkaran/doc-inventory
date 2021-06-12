@@ -91,7 +91,14 @@ public class JDBCQueryManager extends ParamBuilder {
 				} else {
 					prepStmtObj.setDouble(index, (Float) param.getParam());
 				}
-				break;	
+				break;
+			case "Boolean":
+				if (param.getParam() == null) {
+					prepStmtObj.setNull(index, Types.BOOLEAN);
+				} else {
+					prepStmtObj.setBoolean(index, (Boolean) param.getParam());
+				}
+				break;
 			case "Date":
 				if (param.getParam() == null) {
 					prepStmtObj.setNull(index, Types.DATE);
