@@ -46,7 +46,10 @@ public class RegistrationController extends HttpServlet {
 			user.setConfirmPassword(confirmPassword);
 			user.setDateOfBirth(dob);
 			user.setAgree(agree);
-			registrationService.registration(user);
+			Integer lastRegistrationId = registrationService.registration(request, user);
+			if(lastRegistrationId != null) {
+				registrationService.generateOTPForProfileActivation(getServletContext(), lastRegistrationId, user.getEmail());
+			}
 		} catch (ParseException e) {
 			e.printStackTrace();
 			request.setAttribute("errorMsg", "Invalid date format, please maintain " + FormatConstant.INPUT_DATE_FORMAT + " format");

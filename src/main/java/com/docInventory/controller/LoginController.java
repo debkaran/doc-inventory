@@ -1,8 +1,6 @@
 package com.docInventory.controller;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,8 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.docInventory.constants.URIConstant;
 import com.docInventory.dto.UserDTO;
 import com.docInventory.service.impl.LoginService;
-import com.docInventory.util.EmailUtil;
-import com.docInventory.util.RandomString;
 
 @WebServlet(URIConstant.LOGIN)
 public class LoginController extends HttpServlet {

@@ -8,7 +8,7 @@ public class RegistrationValidation {
 				|| userDTO.getDateOfBirth() == null || userDTO.getAgree() == null) {
 			 throw new IllegalArgumentException("Please fill all fields");
 		}
-		if(userDTO.getAgree().equals("agree")) {
+		if(!userDTO.getAgree().equals("agree")) {
 			throw new IllegalArgumentException("You have to accept the aggrement.");
 		}
 		return true;
