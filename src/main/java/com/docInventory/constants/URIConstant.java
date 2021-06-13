@@ -8,4 +8,5 @@ public interface URIConstant {
 	String REGISTRATION = "/registration";
 	String FORGET_PASSWORD = "/forget-password";
 	String RECOVER_PASSWORD = "/recover-password";
+	String PROFILE_IMAGE = "/profile-image";
 }

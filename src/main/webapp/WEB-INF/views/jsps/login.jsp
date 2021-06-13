@@ -22,7 +22,7 @@
 <body class="hold-transition login-page">
 	<div class="login-box">
 		<div class="login-logo">
-			<a href="#"><img src="./resources/images/logo.png" width="64" height="64" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"><b>Doc</b>Inventory</a>
+			<a href="#"><img src="./resources/images/logo.png" width="64" height="64" alt="Inventory Logo" class="brand-image img-circle elevation-3" style="opacity: .8"><b>Doc</b>Inventory</a>
 		</div>
 		<!-- /.login-logo -->
 		<div class="card">

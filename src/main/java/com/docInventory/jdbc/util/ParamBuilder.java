@@ -9,9 +9,19 @@ import com.docInventory.jdbc.dto.SqlParamDTO;
 
 public class ParamBuilder {
 	protected List<SqlParamDTO> params;
-	
+	protected int[] outParamTypes;
+
 	public ParamBuilder() {
 		this.params = new ArrayList<>();
+		this.outParamTypes = new int[] {};
+	}
+
+	public int[] getOutParamTypes() {
+		return outParamTypes;
+	}
+
+	public void setOutParamTypes(int... outParamTypes) {
+		this.outParamTypes = outParamTypes;
 	}
 
 	public void setParams(List<SqlParamDTO> params) {
@@ -27,13 +37,13 @@ public class ParamBuilder {
 		params.add(paramDTO);
 		return this;
 	}
-	
+
 	public ParamBuilder setParam(Long param) {
 		SqlParamDTO paramDTO = new SqlParamDTO("Long", param);
 		params.add(paramDTO);
 		return this;
 	}
-	
+
 	public ParamBuilder setParam(String param) {
 		SqlParamDTO paramDTO = new SqlParamDTO("String", param);
 		params.add(paramDTO);
@@ -45,13 +55,13 @@ public class ParamBuilder {
 		params.add(paramDTO);
 		return this;
 	}
-	
+
 	public ParamBuilder setParam(Double param) {
 		SqlParamDTO paramDTO = new SqlParamDTO("Double", param);
 		params.add(paramDTO);
 		return this;
 	}
-	
+
 	public ParamBuilder setParam(Boolean param) {
 		SqlParamDTO paramDTO = new SqlParamDTO("Boolean", param);
 		params.add(paramDTO);
@@ -63,19 +73,19 @@ public class ParamBuilder {
 		params.add(paramDTO);
 		return this;
 	}
-	
+
 	public ParamBuilder setParam(Integer[] param) {
 		SqlParamDTO paramDTO = new SqlParamDTO("Integer[]", param);
 		params.add(paramDTO);
 		return this;
 	}
-	
+
 	public ParamBuilder setParam(Long[] param) {
 		SqlParamDTO paramDTO = new SqlParamDTO("Long[]", param);
 		params.add(paramDTO);
 		return this;
 	}
-	
+
 	public ParamBuilder setParam(String[] param) {
 		SqlParamDTO paramDTO = new SqlParamDTO("String[]", param);
 		params.add(paramDTO);
@@ -87,19 +97,19 @@ public class ParamBuilder {
 		params.add(paramDTO);
 		return this;
 	}
-	
+
 	public ParamBuilder setParam(Double[] param) {
 		SqlParamDTO paramDTO = new SqlParamDTO("Double[]", param);
 		params.add(paramDTO);
 		return this;
 	}
-	
+
 	public ParamBuilder setParam(Object param) {
 		SqlParamDTO paramDTO = new SqlParamDTO("Object", param);
 		params.add(paramDTO);
 		return this;
 	}
-	
+
 	public ParamBuilder setParam(InputStream param, Integer length) {
 		SqlParamDTO paramDTO = new SqlParamDTO("InputStream", param, length);
 		params.add(paramDTO);
