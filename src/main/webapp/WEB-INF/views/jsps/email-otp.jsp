@@ -22,7 +22,7 @@
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
-      <p class="login-box-msg">Your one time password has send to your linked mail account. OTP is valid only for 10 minutes</p>
+      <p class="login-box-msg">Your one time password has send to your abcd@gmail.com. OTP is valid only for 10 minutes</p>
 
       <form action="./recover-password"" method="post">
         <div class="input-group mb-3">
@@ -33,8 +33,11 @@
           </div>
         </div>
         <div class="row">
+        
           <div class="col-12">
+          
             <button  type="submit" class="btn btn-primary btn-block">Submit</button>
+            <a href = "#">Resend OTP</a>
           </div>
           <!-- /.col -->
         </div>

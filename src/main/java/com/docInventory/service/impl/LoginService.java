@@ -31,8 +31,8 @@ public class LoginService {
 			}
 		};
 		queryManager
-				.setParam(email)
-				.setParam(password);
+				.setParam(email);
+				//.setParam(password);
 		
 		try {
 			user = queryManager.getResultFromSelection();
