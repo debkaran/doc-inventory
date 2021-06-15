@@ -87,6 +87,7 @@ public class EmailUtil {
 		properties.put("mail.smtp.port", "465");
 		properties.put("mail.smtp.ssl.enable", "true");
 		properties.put("mail.smtp.auth", "true");
+		properties.put("mail.smtp.ssl.protocols", "TLSv1.2");
 		// Get the Session object.// and pass
 		Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
