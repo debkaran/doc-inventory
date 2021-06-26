@@ -32,7 +32,7 @@
       	<input type="hidden" name="userId" value="<%=userId %>" />
       	<input type="hidden" name="sourcePage" value="<%=sourcePage %>" />
         <div class="input-group mb-3">
-          <input type="email" name="otp" class="form-control" placeholder="Enter your OTP">
+          <input type="text" name="otp" class="form-control" placeholder="Enter your OTP">
           <div class="input-group-append">
             <div class="input-group-text">
             </div>

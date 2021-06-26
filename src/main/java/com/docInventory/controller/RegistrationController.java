@@ -30,7 +30,8 @@ public class RegistrationController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		reopenRegistrationPage(request, response);
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/views/jsps/registration.jsp");
+		requestDispatcher.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -65,7 +66,7 @@ public class RegistrationController extends HttpServlet {
 					response.sendRedirect("." + otpPageUrl);
 				} else {
 					request.setAttribute("errorMsg", "Something went wrong");
-					reopenRegistrationPage(request, response);
+					doGet(request, response);
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -74,17 +75,11 @@ public class RegistrationController extends HttpServlet {
 			e.printStackTrace();
 			request.setAttribute("errorMsg",
 					"Invalid date format, please maintain " + FormatConstant.INPUT_DATE_FORMAT + " format");
-			reopenRegistrationPage(request, response);
+			doGet(request, response);
 		} catch (IllegalArgumentException e) {
 			request.setAttribute("errorMsg", e.getMessage());
-			reopenRegistrationPage(request, response);
+			doGet(request, response);
 		}
 
-	}
-
-	protected void reopenRegistrationPage(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/views/jsps/registration.jsp");
-		requestDispatcher.forward(request, response);
 	}
 }

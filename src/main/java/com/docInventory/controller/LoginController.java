@@ -37,13 +37,12 @@ public class LoginController extends HttpServlet {
 				resp.sendRedirect("."+URIConstant.INVENTORY);
 			} else {
 				req.setAttribute("errorMessage", "Invalid user id or password");
+				doGet(req, resp);
 			}
 		} catch(IllegalStateException e) {
 			req.setAttribute("errorMessage", e.getMessage());
+			doGet(req, resp);
 		}
-		
-		RequestDispatcher requestDispatcher = req.getRequestDispatcher("WEB-INF/views/jsps/login.jsp");
-		requestDispatcher.forward(req, resp);
 	}
 
 }
