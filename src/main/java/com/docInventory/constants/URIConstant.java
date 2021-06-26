@@ -11,4 +11,5 @@ public interface URIConstant {
 	String RECOVER_PASSWORD = "/recover-password";
 	String PROFILE_IMAGE = "/profile-image";
 	String RESEND_OTP = "/resend-otp";
+	String ACTIVATION_SUCCESS = "/activation-success";
 }

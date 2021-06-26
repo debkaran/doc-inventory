@@ -65,9 +65,7 @@ public class EmailOTPController extends HttpServlet {
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/views/jsps/email-otp.jsp");
 			requestDispatcher.forward(request, response);
 		}
-		
-		//RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/views/jsps/email-otp.jsp");
-		//requestDispatcher.forward(request, response);
+		response.sendRedirect("." + URIConstant.ACTIVATION_SUCCESS);
 	}
 	
 }

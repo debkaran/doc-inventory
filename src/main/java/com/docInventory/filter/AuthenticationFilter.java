@@ -22,7 +22,7 @@ public class AuthenticationFilter implements Filter {
 	private ServletContext context;
 	private final String[] whiteListedPage = new String[] { URIConstant.LOGIN, URIConstant.REGISTRATION,
 			URIConstant.FORGET_PASSWORD, URIConstant.RECOVER_PASSWORD, URIConstant.PROFILE_IMAGE,
-			URIConstant.EMAIL_OTP, URIConstant.RESEND_OTP };
+			URIConstant.EMAIL_OTP, URIConstant.RESEND_OTP, URIConstant.ACTIVATION_SUCCESS};
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
