@@ -1,0 +1,37 @@
+package com.docInventory.controller;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.docInventory.constants.URIConstant;
+import com.docInventory.service.impl.ResendOTPService;
+import com.docInventory.util.AES256;
+import com.docInventory.util.StringUtils;
+
+@WebServlet(URIConstant.RESEND_OTP)
+public class ResendOtpController extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	private final ResendOTPService resendOTPService = new ResendOTPService();
+    
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String userId = request.getParameter("userId");
+		String sourcePage = request.getParameter("sourcePage");
+		
+		try {
+			String encryptedID = AES256.encrypt(userId);
+			String otpPageUrl = URIConstant.EMAIL_OTP + "?eUId=" + StringUtils.uriEncodeValue(encryptedID)
+					+ "&srcP=" + sourcePage;
+			resendOTPService.validateAndResendOTP(otpPageUrl, getServletContext(), request, userId, sourcePage);
+			response.getWriter().write("Success");
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.getWriter().write("Error: "+e.getMessage());
+		}
+	}
+
+}

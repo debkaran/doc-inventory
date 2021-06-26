@@ -15,14 +15,15 @@ import com.docInventory.constants.URIConstant;
 public class ForgetPassword extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/views/jsps/forget-password.jsp");
 		requestDispatcher.forward(request, response);
 	}
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/views/jsps/email-otp.jsp");
-		requestDispatcher.forward(request, response);
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		response.sendRedirect("." + URIConstant.EMAIL_OTP);
 	}
 }
