@@ -22,11 +22,17 @@
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
-      <p class="login-box-msg">Your one time password has send to your abcd@gmail.com. OTP is valid only for 10 minutes</p>
+      <p class="login-box-msg">Your one time password has send to your <a href="#"><%=request.getAttribute("userEmail") %></a>. OTP is valid only for 10 minutes</p>
 
-      <form action="./recover-password"" method="post">
+      <form action="./email-OTP" method="post">
+	      <%
+	      	String userId = (String) request.getAttribute("userId");
+    		String sourcePage = (String) request.getAttribute("sourcePage");
+	      %>
+      	<input type="hidden" name="userId" value="<%=userId %>" />
+      	<input type="hidden" name="sourcePage" value="<%=sourcePage %>" />
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Enter your OTP">
+          <input type="email" name="otp" class="form-control" placeholder="Enter your OTP">
           <div class="input-group-append">
             <div class="input-group-text">
             </div>

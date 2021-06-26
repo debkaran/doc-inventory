@@ -28,17 +28,22 @@ public class LoginController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String email = req.getParameter("email");
 		String password = req.getParameter("password");
+		
+		try {
+			UserDTO user = loginService.getUserDetailsByEmailidPassword(email, password);
 
-		UserDTO user = loginService.getUserDetailsByEmailidPassword(email, password);
-
-		if (user != null) {
-			req.getSession().setAttribute("user", user);
-			resp.sendRedirect("."+URIConstant.INVENTORY);
-		} else {
-			req.setAttribute("errorMessage", "Invalid user id or password");
-			RequestDispatcher requestDispatcher = req.getRequestDispatcher("WEB-INF/views/jsps/login.jsp");
-			requestDispatcher.forward(req, resp);
+			if (user != null) {
+				req.getSession().setAttribute("user", user);
+				resp.sendRedirect("."+URIConstant.INVENTORY);
+			} else {
+				req.setAttribute("errorMessage", "Invalid user id or password");
+			}
+		} catch(IllegalStateException e) {
+			req.setAttribute("errorMessage", e.getMessage());
 		}
+		
+		RequestDispatcher requestDispatcher = req.getRequestDispatcher("WEB-INF/views/jsps/login.jsp");
+		requestDispatcher.forward(req, resp);
 	}
 
 }

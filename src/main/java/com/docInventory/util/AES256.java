@@ -35,6 +35,12 @@ public class AES256 {
 		return Base64.getEncoder().encodeToString(cipher.doFinal(strToEncrypt.getBytes(StandardCharsets.UTF_8)));
 	}
 
+	public static String encrypt(Integer strToEncrypt) throws Exception {
+		Cipher cipher = getCipher(Cipher.ENCRYPT_MODE);
+		return Base64.getEncoder()
+				.encodeToString(cipher.doFinal(String.valueOf(strToEncrypt).getBytes(StandardCharsets.UTF_8)));
+	}
+
 	public static String decrypt(String strToDecrypt) throws Exception {
 		Cipher cipher = getCipher(Cipher.DECRYPT_MODE);
 		return new String(cipher.doFinal(Base64.getDecoder().decode(strToDecrypt)));
