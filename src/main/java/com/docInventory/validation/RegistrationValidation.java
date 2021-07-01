@@ -8,7 +8,7 @@ import com.docInventory.dto.UserDTO;
 import com.docInventory.entity.UserDetailsEntity;
 
 public class RegistrationValidation {
-	private UserDetailsDao userDetails = new UserDetailsDaoImpl();
+	private UserDetailsDao userDetailsDao = new UserDetailsDaoImpl();
 	
 	public boolean validate(UserDTO userDTO) {
 		if (userDTO.getName() == null || userDTO.getEmail() == null || userDTO.getPassword() == null
@@ -21,7 +21,7 @@ public class RegistrationValidation {
 		
 		
 		try {
-			UserDetailsEntity userDetailsEntity = userDetails.getUserByEmail(userDTO.getEmail());
+			UserDetailsEntity userDetailsEntity = userDetailsDao.getUserByEmail(userDTO.getEmail());
 			if(userDetailsEntity != null){
 				throw new IllegalArgumentException("* This email is already registered.");
 			}

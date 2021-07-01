@@ -56,11 +56,12 @@ public class RegistrationController extends HttpServlet {
 			Integer lastRegistrationId = registrationService.registration(request, user);
 
 			try {
-				String encryptedID = AES256.encrypt(lastRegistrationId);
-				String otpPageUrl = URIConstant.EMAIL_OTP + "?eUId=" + StringUtils.uriEncodeValue(encryptedID)
-						+ "&srcP=" + OtpConstant.REGISTRATION;
-				
 				if (lastRegistrationId != null) {
+					
+					String encryptedID = AES256.encrypt(lastRegistrationId);
+					String otpPageUrl = URIConstant.EMAIL_OTP + "?eUId=" + StringUtils.uriEncodeValue(encryptedID)
+							+ "&srcP=" + OtpConstant.REGISTRATION;
+					
 					user.setId(lastRegistrationId);
 					userOTPService.sendOtpToEmail(otpPageUrl, getServletContext(), request, user);
 					response.sendRedirect("." + otpPageUrl);

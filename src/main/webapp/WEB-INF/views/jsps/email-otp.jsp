@@ -28,9 +28,11 @@
 	      <%
 	      	String userId = (String) request.getAttribute("userId");
     		String sourcePage = (String) request.getAttribute("sourcePage");
+    		String eUId = (String) request.getAttribute("eUId"); 
 	      %>
       	<input type="hidden" name="userId" value="<%=userId %>" />
       	<input type="hidden" name="sourcePage" value="<%=sourcePage %>" />
+      	<input type="hidden" name="eUId" value="<%=eUId %>" />
         <div class="input-group mb-3">
           <input type="text" name="otp" class="form-control" placeholder="Enter your OTP">
           <div class="input-group-append">
@@ -44,6 +46,14 @@
           
             <button  type="submit" class="btn btn-primary btn-block">Submit</button>
             <a href = "#">Resend OTP</a>
+            <% 
+				String errorMessage = (String) request.getAttribute("errorMessage");
+				if(errorMessage != null){
+					%>
+					<p style="color: red; font-size: 12px; font-weight: 600;">* <%=errorMessage %></p>
+					<%
+				}
+			%>
           </div>
           <!-- /.col -->
         </div>

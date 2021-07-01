@@ -10,6 +10,7 @@ public class UserOTPDetailsEntity {
 	private Date otpGenerationDate;
 	private Boolean isUsed;
 	private Boolean isDelete;
+	private Boolean isExpired;
 
 	public Integer getId() {
 		return id;
@@ -65,5 +66,13 @@ public class UserOTPDetailsEntity {
 
 	public void setIsDelete(Boolean isDelete) {
 		this.isDelete = isDelete;
+	}
+
+	public Boolean getIsExpired() {
+		return isExpired;
+	}
+
+	public void setIsExpired(Boolean isExpired) {
+		this.isExpired = isExpired;
 	}
 }

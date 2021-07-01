@@ -47,6 +47,9 @@
           <div class="col-12">
             <button type="submit" class="btn btn-primary btn-block">Change password</button>
           </div>
+          <div class="col-12">
+            <b>&lt;</b> Back to <a href = "./">login</a>
+          </div>
           <!-- /.col -->
         </div>
       </form>

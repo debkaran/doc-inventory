@@ -16,56 +16,69 @@ import com.docInventory.dto.UserOTPDto;
 import com.docInventory.service.impl.UserOTPService;
 import com.docInventory.service.impl.UserRegistrationService;
 import com.docInventory.util.AES256;
+import com.docInventory.util.StringUtils;
 
 @WebServlet(URIConstant.EMAIL_OTP)
 public class EmailOTPController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private final UserRegistrationService registrationService = new UserRegistrationService();
 	private final UserOTPService userOTPService = new UserOTPService();
+	
+	private String errorMsg;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String encUserId = request.getParameter("eUId");
 		String sourcePage = request.getParameter("srcP");
 		
 		try {
-			if(sourcePage == null) {
+			if (sourcePage == null) {
 				throw new IllegalArgumentException("Source Page should not be null");
-			} else if(!sourcePage.equals(OtpConstant.REGISTRATION) && !sourcePage.equals(OtpConstant.FORGET_PASSWORD)) {
+			} else if (!sourcePage.equals(OtpConstant.REGISTRATION)
+					&& !sourcePage.equals(OtpConstant.FORGET_PASSWORD)) {
 				throw new IllegalArgumentException("Wrong source page.");
 			}
-			
+
 			String userId = AES256.decrypt(encUserId);
 			UserDTO userDetails = registrationService.getUserDetailsByUserId(userId);
 			request.setAttribute("sourcePage", sourcePage);
 			request.setAttribute("userId", userId);
+			request.setAttribute("eUId", encUserId);
 			request.setAttribute("userEmail", userDetails.getEmail());
+			if(this.errorMsg != null){
+				request.setAttribute("errorMessage", this.errorMsg);
+				this.errorMsg = null;
+			}
+			
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/views/jsps/email-otp.jsp");
 			requestDispatcher.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
-			response.sendRedirect("."+URIConstant.LOGIN);
+			response.sendRedirect("." + URIConstant.LOGIN);
 		}
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String userId = request.getParameter("userId");
 		String sourcePage = request.getParameter("sourcePage");
 		String otp = request.getParameter("otp");
+		String eUId = request.getParameter("eUId");
 		UserOTPDto otpDto = new UserOTPDto();
 		otpDto.setUserId(Integer.parseInt(userId));
 		otpDto.setSourcePage(sourcePage);
 		otpDto.setOtp(otp);
-		
-		
+
 		try {
 			userOTPService.validateUserOtp(otpDto);
-		}catch(RuntimeException ex) {
-			request.setAttribute("errorMessage", ex.getMessage());
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/views/jsps/email-otp.jsp");
-			requestDispatcher.forward(request, response);
+			response.sendRedirect("." + URIConstant.ACTIVATION_SUCCESS);
+		} catch (RuntimeException ex) {
+			this.errorMsg = ex.getMessage();
+			response.sendRedirect(
+					"." + URIConstant.EMAIL_OTP + "?eUId=" + StringUtils.uriEncodeValue(eUId) + "&srcP=" + sourcePage);
 		}
-		response.sendRedirect("." + URIConstant.ACTIVATION_SUCCESS);
+
 	}
-	
+
 }

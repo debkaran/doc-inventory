@@ -37,6 +37,7 @@ public class UserOTPDetailsDaoImpl implements UserOTPDetailsDao {
 					otpDetailsEntity.setOtpGenerationDate(rs.getDate("otp_generation_date"));
 					otpDetailsEntity.setIsUsed(rs.getBoolean("is_used"));
 					otpDetailsEntity.setIsDelete(rs.getBoolean("is_delete"));
+					otpDetailsEntity.setIsExpired(rs.getBoolean("is_expired"));
 				}
 				
 				return otpDetailsEntity;
@@ -50,11 +51,15 @@ public class UserOTPDetailsDaoImpl implements UserOTPDetailsDao {
 	
 	@Override
 	public UpdateQueryDTO updateUserOTPAsUsed(UserOTPDto otpDto) {
-		String query = "update user_otp_details set is_used = true, is_delete = true where user_id = ? and source_page = ?";
+		String query = "update user_otp_details set is_used = true, is_delete = true where user_id = ? and source_page = ? and is_delete is false";
 		UpdateQueryManager qManager = new UpdateQueryManager(query);
 		qManager.setParam(otpDto.getUserId()).setParam(otpDto.getSourcePage());
-		UpdateQueryDTO updateQueryDTO = qManager.getExecute(true);
+		UpdateQueryDTO updateQueryDTO = qManager.getExecute(false);
 		return updateQueryDTO;
 	}
-
+	
+	@Override
+	public UpdateQueryDTO deleteUserOTP(UserOTPDto otpDto) {
+		return this.updateUserOTPAsUsed(otpDto);
+	}
 }

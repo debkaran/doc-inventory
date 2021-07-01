@@ -22,14 +22,14 @@ import com.docInventory.validation.RegistrationValidation;
 
 public class UserRegistrationService {
 	private RegistrationValidation registrationValidation = new RegistrationValidation();
-	private UserDetailsDao userDetails = new UserDetailsDaoImpl();
-	private UserOTPDetailsDao userOTPDetails = new UserOTPDetailsDaoImpl();
+	private UserDetailsDao userDetailsDao = new UserDetailsDaoImpl();
+	private UserOTPDetailsDao userOTPDetailsDao = new UserOTPDetailsDaoImpl();
 
 	public Integer registration(HttpServletRequest request, UserDTO user) {
 		Integer fromSelection = null;
 		if (registrationValidation.validate(user)) {
 			try {
-				fromSelection = userDetails.registerUserDetails(ServletRequestUtil.getTotalRootUrl(request), user);
+				fromSelection = userDetailsDao.registerUserDetails(ServletRequestUtil.getTotalRootUrl(request), user);
 				System.out.println("Inserted with Id " + fromSelection);
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -41,7 +41,7 @@ public class UserRegistrationService {
 
 	public void generateOTPForProfileActivation(ServletContext context, Integer userId, String email, String link) {
 		String otp = RandomString.getString(6);
-		UpdateQueryDTO updateQueryDTO = userOTPDetails.insertUserOTP(userId, OtpConstant.REGISTRATION, otp);
+		UpdateQueryDTO updateQueryDTO = userOTPDetailsDao.insertUserOTP(userId, OtpConstant.REGISTRATION, otp);
 		if (updateQueryDTO != null) {
 			Map<String, String> paramMap = new HashMap<String, String>();
 			paramMap.put("randomString", otp);
@@ -54,7 +54,7 @@ public class UserRegistrationService {
 	public UserDTO getUserDetailsByUserId(String userId) {
 		UserDTO user = null;
 		try {
-			UserDetailsEntity userDetailsEntity = userDetails.getUserByUserId(userId);
+			UserDetailsEntity userDetailsEntity = userDetailsDao.getUserByUserId(userId);
 			if(userDetailsEntity != null) {
 				user = new UserDTO();
 				user.setId(userDetailsEntity.getId());
