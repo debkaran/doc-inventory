@@ -9,8 +9,10 @@ import com.docInventory.constants.URIConstant;
 import com.docInventory.dao.UserDetailsDao;
 import com.docInventory.dto.UserDTO;
 import com.docInventory.entity.UserDetailsEntity;
+import com.docInventory.jdbc.dto.UpdateQueryDTO;
 import com.docInventory.jdbc.util.SelectQueryManager;
 import com.docInventory.jdbc.util.StoreProcedureUpdate;
+import com.docInventory.jdbc.util.UpdateQueryManager;
 
 public class UserDetailsDaoImpl implements UserDetailsDao {
 	
@@ -45,8 +47,7 @@ public class UserDetailsDaoImpl implements UserDetailsDao {
 				return buildUserDetailsEntity(rs);
 			}
 		};
-		queryManager
-				.setParam(email);
+		queryManager.setParam(email);
 		
 		return queryManager.getResultFromSelection();
 	}
@@ -84,6 +85,15 @@ public class UserDetailsDaoImpl implements UserDetailsDao {
 				.setParam(userId);
 		
 		return queryManager.getResultFromSelection();
+	}
+	
+	@Override
+	public UpdateQueryDTO activateUser(Integer userId) {
+		String query = "update user_details set is_active = true where id = ?";
+		UpdateQueryManager qManager = new UpdateQueryManager(query);
+		qManager.setParam(userId);
+		UpdateQueryDTO updateQueryDTO = qManager.getExecute(true);
+		return updateQueryDTO;
 	}
 
 }

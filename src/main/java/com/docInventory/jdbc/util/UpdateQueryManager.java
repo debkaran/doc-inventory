@@ -163,8 +163,9 @@ public class UpdateQueryManager extends JDBCQueryManager {
 			if (resultSetObj.next()) {
 				queryDTO.setLastGeneretedId(resultSetObj.getInt(1));
 			}
-			
-			connObj.commit();
+			if(isConnClose == true){
+				connObj.commit();
+			}
 			return queryDTO;
 		} catch (SQLException se) {
 			se.printStackTrace();

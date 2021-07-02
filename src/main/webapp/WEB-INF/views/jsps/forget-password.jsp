@@ -37,6 +37,12 @@
           <div class="col-12">
             <button  type="submit" class="btn btn-primary btn-block">Request new password</button>
           </div>
+          <div class="col-12">
+            <b>&lt;</b> Back to <a href = "./">login</a>
+          </div>
+          <div class="col-12">
+            Don't have an account? <a href = "./registration">Sign up</a>
+          </div>
           <!-- /.col -->
         </div>
       </form>

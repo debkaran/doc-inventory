@@ -3,7 +3,9 @@ package com.docInventory.service.impl;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
+import com.docInventory.dao.UserDetailsDao;
 import com.docInventory.dao.UserOTPDetailsDao;
+import com.docInventory.dao.impl.UserDetailsDaoImpl;
 import com.docInventory.dao.impl.UserOTPDetailsDaoImpl;
 import com.docInventory.dto.UserDTO;
 import com.docInventory.dto.UserOTPDto;
@@ -14,13 +16,17 @@ import com.docInventory.validation.OTPValidation;
 public class UserOTPService {
 	private final OTPValidation otpValidation = new OTPValidation();
 	private final UserOTPDetailsDao otpDetailsDao = new UserOTPDetailsDaoImpl();
-	private UserRegistrationService registrationService = new UserRegistrationService();
+	private final UserDetailsDao userDetailsDao = new UserDetailsDaoImpl();
+	private final UserRegistrationService registrationService = new UserRegistrationService();
 
 	public boolean validateUserOtp(UserOTPDto otpDto) {
 		if (otpValidation.isValidateOTP(otpDto)) {
 			UpdateQueryDTO updateQueryDTO = otpDetailsDao.updateUserOTPAsUsed(otpDto);
 			if (updateQueryDTO != null && updateQueryDTO.getNoOfRowEffected() > 0) {
-				return true;
+				updateQueryDTO = userDetailsDao.activateUser(otpDto.getUserId());
+				if (updateQueryDTO != null && updateQueryDTO.getNoOfRowEffected() > 0) {
+					return true;
+				}
 			}
 		}
 

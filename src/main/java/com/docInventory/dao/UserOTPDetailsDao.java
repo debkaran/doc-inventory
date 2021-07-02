@@ -12,4 +12,6 @@ public interface UserOTPDetailsDao {
 	UserOTPDetailsEntity getUserOTPDetailsByUserIdAndSourcePage(String userId, String sourcePage) throws SQLException;
 	
 	UpdateQueryDTO updateUserOTPAsUsed(UserOTPDto otpDto);
+	
+	UpdateQueryDTO deleteUserOTP(UserOTPDto otpDto);
 }

@@ -8,12 +8,12 @@ import com.docInventory.dto.UserDTO;
 import com.docInventory.entity.UserDetailsEntity;
 
 public class LoginService {
-	private UserDetailsDao userDetails = new UserDetailsDaoImpl();
+	private UserDetailsDao userDetailsDao = new UserDetailsDaoImpl();
 	
 	public UserDTO getUserDetailsByEmailidPassword(String email, String password) {
 		UserDTO user = null;
 		try {
-			UserDetailsEntity userDetailsEntity = userDetails.getUserByEmail(email);
+			UserDetailsEntity userDetailsEntity = userDetailsDao.getUserByEmail(email);
 			if(userDetailsEntity != null && userDetailsEntity.getPassword().equals(password)) {
 				if(userDetailsEntity.getIsActive() == true) {
 					user = new UserDTO();

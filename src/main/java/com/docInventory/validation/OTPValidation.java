@@ -26,9 +26,11 @@ public class OTPValidation {
 				throw new IllegalArgumentException("Invalid OTP, Please enter valid OTP");
 			}
 			if(userOTPDetails.getIsUsed()) {
-				throw new IllegalArgumentException("OTP already Used");
+				throw new IllegalArgumentException("OTP already Used, Please login");
 			}
-			
+			if(userOTPDetails.getIsExpired() == true){
+				throw new IllegalArgumentException("OTP has expired, Please click resend to get new OTP");
+			}
 			return true;
 		} catch (SQLException e) {
 			throw new RuntimeException(e.getMessage());
@@ -36,16 +38,16 @@ public class OTPValidation {
 	}
 	
 	
-	public boolean validateResendRequest(String userId, String sourcePage) {
-		if (StringUtils.isEmpty(userId)) {
+	public boolean validateResendRequest(UserOTPDto otpDto) {
+		if (otpDto.getUserId() == null) {
 			throw new IllegalArgumentException("Invalid User");
-		} else if (StringUtils.isEmpty(sourcePage)) {
+		} else if (StringUtils.isEmpty(otpDto.getSourcePage())) {
 			throw new IllegalArgumentException("Source is invalid");
 		}
 		
 		try {
 			UserOTPDetailsEntity userOTPDetails = userOTPDetailsDao
-					.getUserOTPDetailsByUserIdAndSourcePage(userId, sourcePage);
+					.getUserOTPDetailsByUserIdAndSourcePage(String.valueOf(otpDto.getUserId()), otpDto.getSourcePage());
 			if(userOTPDetails == null) {
 				throw new IllegalArgumentException("Invalid User");
 			}
