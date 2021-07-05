@@ -13,6 +13,16 @@
   <link rel="stylesheet" href="./resources/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="./resources/dist/css/adminlte.min.css">
+  <style type="text/css">
+  	.disabled-a-text{
+  		color: #e9ecef;
+  		cursor: text;
+  	}
+  	.disabled-a-text:hover{
+  		color: #e9ecef;
+  		cursor: text;
+  	}
+  </style>
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
@@ -30,8 +40,8 @@
     		String sourcePage = (String) request.getAttribute("sourcePage");
     		String eUId = (String) request.getAttribute("eUId"); 
 	      %>
-      	<input type="hidden" name="userId" value="<%=userId %>" />
-      	<input type="hidden" name="sourcePage" value="<%=sourcePage %>" />
+      	<input type="hidden" name="userId" id="userId" value="<%=userId %>" />
+      	<input type="hidden" name="sourcePage" id="sourcePage" value="<%=sourcePage %>" />
       	<input type="hidden" name="eUId" value="<%=eUId %>" />
         <div class="input-group mb-3">
           <input type="text" name="otp" class="form-control" placeholder="Enter your OTP">
@@ -41,17 +51,29 @@
           </div>
         </div>
         <div class="row">
-        
           <div class="col-12">
-          
-            <button  type="submit" class="btn btn-primary btn-block">Submit</button>
-            <a href = "#">Resend OTP</a>
+            <button  type="submit" id="submitBtn" class="btn btn-primary btn-block">Submit</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-1 d-none" id="resend-email-loader">
+           	<span class="spinner-border spinner-border-sm text-primary" role="status" aria-hidden="true"></span>
+          </div>
+          <div class="col text-left">
+          	<a href="#" id="resendOTP">Resend OTP</a>
+          </div>
+        </div>
+        <div class="row d-none">
+        	<div class="col-12" style="color: green;" id="resendInfo">&nbsp;</div>
+        </div>
+        <div class="row">
+          <div class="col-12" id="errorMessage">
             <% 
-				String errorMessage = (String) request.getAttribute("errorMessage");
+            	String errorMessage = (String) request.getAttribute("errorMessage");
 				if(errorMessage != null){
-					%>
+			%>
 					<p style="color: red; font-size: 12px; font-weight: 600;">* <%=errorMessage %></p>
-					<%
+			<%
 				}
 			%>
           </div>
@@ -70,5 +92,6 @@
 <script src="./resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="./resources/dist/js/adminlte.min.js"></script>
+<script src="./resources/js/resend-OTP-ajax.js"></script>
 </body>
 </html>
