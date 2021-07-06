@@ -71,8 +71,14 @@ public class EmailOTPController extends HttpServlet {
 		otpDto.setOtp(otp);
 
 		try {
-			userOTPService.validateUserOtp(otpDto);
-			response.sendRedirect("." + URIConstant.ACTIVATION_SUCCESS);
+			boolean isValid = userOTPService.validateUserOtp(otpDto);
+			if(isValid) {
+				response.sendRedirect("." + URIConstant.ACTIVATION_SUCCESS);
+			} else{
+				this.errorMsg = "Somthing went wrong";
+				response.sendRedirect(
+						"." + URIConstant.EMAIL_OTP + "?eUId=" + StringUtils.uriEncodeValue(eUId) + "&srcP=" + sourcePage);
+			}
 		} catch (RuntimeException ex) {
 			this.errorMsg = ex.getMessage();
 			response.sendRedirect(

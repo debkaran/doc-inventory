@@ -10,6 +10,7 @@ import com.docInventory.jdbc.dto.UpdateQueryDTO;
 public class UpdateQueryManager extends JDBCQueryManager {
 	
 	private Connection connObj;
+	private static volatile UpdateQueryManager updateQueryManager = new UpdateQueryManager();
 
 	public Connection getConnObj() {
 		return connObj;
@@ -19,8 +20,8 @@ public class UpdateQueryManager extends JDBCQueryManager {
 		this.connObj = connObj;
 	}
 
-	public UpdateQueryManager(String query) {
-		super(query);
+	private UpdateQueryManager() {
+		super(null);
 	}
 	
 	public void setQuery(String query) {
@@ -50,10 +51,10 @@ public class UpdateQueryManager extends JDBCQueryManager {
 				try {
 					this.connObj = HikariCPDataSourceManager.getConnection();
 					this.stmt = this.getPreparedStatement(this.connObj, false);
+					this.connObj.setAutoCommit(false);
 				} catch (SQLException e) {
-					e.printStackTrace();
-				} finally {
 					this.cleanUp(true);
+					e.printStackTrace();
 				}
 			}
 		}
@@ -80,8 +81,8 @@ public class UpdateQueryManager extends JDBCQueryManager {
 				
 				System.out.println("Update Prepared Statement :\n\t" + this.stmt.toString());
 				int[] noOfRowEffectedRowArr = this.stmt.executeBatch();
-				
-				connObj.commit();
+				if(isConnClose == true)
+					connObj.commit();
 				return noOfRowEffectedRowArr;
 			} catch (SQLException se) {
 				se.printStackTrace();
@@ -149,11 +150,11 @@ public class UpdateQueryManager extends JDBCQueryManager {
 			if(this.connObj == null) {
 				connObj = HikariCPDataSourceManager.getConnection();
 				this.connObj = connObj;
+				connObj.setAutoCommit(false);
 			} else {
 				connObj = this.connObj;
 			}
 			
-			connObj.setAutoCommit(false);
 			prepStmtObj = this.buildStatement(connObj, false);
 			System.out.println("Update Prepared Statement :\n\t" + prepStmtObj.toString());
 			queryDTO = new UpdateQueryDTO();
@@ -210,5 +211,10 @@ public class UpdateQueryManager extends JDBCQueryManager {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	public static UpdateQueryManager getUpdateQueryManagerInstance(String query) {
+		updateQueryManager.setQuery(query);
+		return updateQueryManager;
 	}
 }

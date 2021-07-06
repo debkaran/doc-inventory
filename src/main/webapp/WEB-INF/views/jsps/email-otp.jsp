@@ -23,6 +23,7 @@
   		cursor: text;
   	}
   </style>
+  <link rel="Shortcut Icon" href="./resources/images/favicon.ico" type="image/x-icon" />
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">

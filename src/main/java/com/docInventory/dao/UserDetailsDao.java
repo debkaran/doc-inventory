@@ -14,4 +14,8 @@ public interface UserDetailsDao {
 	Integer registerUserDetails(String baseUrl, UserDTO user) throws SQLException;
 
 	UpdateQueryDTO activateUser(Integer userId);
+	
+	UpdateQueryDTO updateOnFailureLogin(Integer userId);
+	
+	UpdateQueryDTO updateOnSuccessLogin(Integer userId);
 }

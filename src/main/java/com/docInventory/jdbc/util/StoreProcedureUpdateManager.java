@@ -4,9 +4,9 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public abstract class StoreProcedureUpdate<T> extends SPJDBCQueryManager{
+public abstract class StoreProcedureUpdateManager<T> extends SPJDBCQueryManager{
 
-	public StoreProcedureUpdate(String query) {
+	public StoreProcedureUpdateManager(String query) {
 		super(query);
 	}
 
