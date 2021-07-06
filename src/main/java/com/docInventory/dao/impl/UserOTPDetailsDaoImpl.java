@@ -15,7 +15,7 @@ public class UserOTPDetailsDaoImpl implements UserOTPDetailsDao {
 	@Override
 	public UpdateQueryDTO insertUserOTP(Integer userId, String sourcePage, String otp) {
 		String query = "insert into user_otp_details(user_id, source_page, otp) values(?,  ?,  ?)";
-		UpdateQueryManager qManager = new UpdateQueryManager(query);
+		UpdateQueryManager qManager = UpdateQueryManager.getUpdateQueryManagerInstance(query);
 		qManager.setParam(userId).setParam(sourcePage).setParam(otp);
 		UpdateQueryDTO updateQueryDTO = qManager.getExecute(true);
 		return updateQueryDTO;
@@ -52,7 +52,7 @@ public class UserOTPDetailsDaoImpl implements UserOTPDetailsDao {
 	@Override
 	public UpdateQueryDTO updateUserOTPAsUsed(UserOTPDto otpDto) {
 		String query = "update user_otp_details set is_used = true, is_delete = true where user_id = ? and source_page = ? and is_delete is false";
-		UpdateQueryManager qManager = new UpdateQueryManager(query);
+		UpdateQueryManager qManager = UpdateQueryManager.getUpdateQueryManagerInstance(query);
 		qManager.setParam(otpDto.getUserId()).setParam(otpDto.getSourcePage());
 		UpdateQueryDTO updateQueryDTO = qManager.getExecute(false);
 		return updateQueryDTO;

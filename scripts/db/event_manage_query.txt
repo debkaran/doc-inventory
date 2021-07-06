@@ -1,0 +1,20 @@
+SHOW PROCESSLIST;
+SET GLOBAL event_scheduler = ON;
+SHOW EVENTS FROM classicmodels;
+DROP EVENT `otp_expired_event`;
+SHOW EVENTS FROM doc_inventory;
+
+
+
+//create event query
+
+CREATE EVENT `otp_expired_event` 
+ON SCHEDULE EVERY 1 MINUTE 
+ON COMPLETION PRESERVE
+DO 
+	UPDATE user_otp_details 
+		SET 
+			`is_expired` = TRUE
+		WHERE
+			`otp_generation_date` < (NOW() - INTERVAL 10 MINUTE)
+				AND `is_expired` IS FALSE;

@@ -11,7 +11,7 @@ import com.docInventory.dto.UserDTO;
 import com.docInventory.entity.UserDetailsEntity;
 import com.docInventory.jdbc.dto.UpdateQueryDTO;
 import com.docInventory.jdbc.util.SelectQueryManager;
-import com.docInventory.jdbc.util.StoreProcedureUpdate;
+import com.docInventory.jdbc.util.StoreProcedureUpdateManager;
 import com.docInventory.jdbc.util.UpdateQueryManager;
 
 public class UserDetailsDaoImpl implements UserDetailsDao {
@@ -59,7 +59,7 @@ public class UserDetailsDaoImpl implements UserDetailsDao {
 				+ "?text=" + user.getName().charAt(0);
 		user.setProfilePicture(defaultProfilePicture);
 		String query = "{call CreateAccount(?, ? ,?, ?, ?, ?)}";
-		StoreProcedureUpdate<Integer> sp = new StoreProcedureUpdate<Integer>(query) {
+		StoreProcedureUpdateManager<Integer> sp = new StoreProcedureUpdateManager<Integer>(query) {
 			@Override
 			protected Integer prepareData(CallableStatement statement) throws SQLException {
 				return statement.getInt(6);
@@ -90,10 +90,27 @@ public class UserDetailsDaoImpl implements UserDetailsDao {
 	@Override
 	public UpdateQueryDTO activateUser(Integer userId) {
 		String query = "update user_details set is_active = true where id = ?";
-		UpdateQueryManager qManager = new UpdateQueryManager(query);
+		UpdateQueryManager qManager = UpdateQueryManager.getUpdateQueryManagerInstance(query);
 		qManager.setParam(userId);
 		UpdateQueryDTO updateQueryDTO = qManager.getExecute(true);
 		return updateQueryDTO;
 	}
 
+	@Override
+	public UpdateQueryDTO updateOnFailureLogin(Integer userId) {
+		String query = "update user_details set no_of_failure_login = (no_of_failure_login + 1), last_failure_login_time = CURRENT_TIMESTAMP where id = ?";
+		UpdateQueryManager qManager = UpdateQueryManager.getUpdateQueryManagerInstance(query);
+		qManager.setParam(userId);
+		UpdateQueryDTO updateQueryDTO = qManager.getExecute(true);
+		return updateQueryDTO;
+	}
+	
+	@Override
+	public UpdateQueryDTO updateOnSuccessLogin(Integer userId) {
+		String query = "update user_details set no_of_failure_login = 0 where id = ?";
+		UpdateQueryManager qManager = UpdateQueryManager.getUpdateQueryManagerInstance(query);
+		qManager.setParam(userId);
+		UpdateQueryDTO updateQueryDTO = qManager.getExecute(true);
+		return updateQueryDTO;
+	}
 }
