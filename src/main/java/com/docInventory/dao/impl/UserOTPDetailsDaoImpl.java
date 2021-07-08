@@ -62,4 +62,32 @@ public class UserOTPDetailsDaoImpl implements UserOTPDetailsDao {
 	public UpdateQueryDTO deleteUserOTP(UserOTPDto otpDto) {
 		return this.updateUserOTPAsUsed(otpDto);
 	}
+
+	@Override
+	public UserOTPDetailsEntity getUserOTPDetailsById(Integer otpId) throws SQLException {
+		String query = "select * from user_otp_details where id = ? and is_delete is FALSE";
+		SelectQueryManager<UserOTPDetailsEntity> queryManager = new SelectQueryManager<UserOTPDetailsEntity>(query) {
+			@Override
+			protected UserOTPDetailsEntity prepareData(ResultSet rs) throws SQLException {
+				UserOTPDetailsEntity otpDetailsEntity = null;
+				if (rs.next()) {
+					otpDetailsEntity = new UserOTPDetailsEntity();
+					otpDetailsEntity.setId(rs.getInt("id"));
+					otpDetailsEntity.setUserId(rs.getInt("user_id"));
+					otpDetailsEntity.setSourcePage(rs.getString("source_page"));
+					otpDetailsEntity.setOtp(rs.getString("otp"));
+					otpDetailsEntity.setOtpGenerationDate(rs.getDate("otp_generation_date"));
+					otpDetailsEntity.setIsUsed(rs.getBoolean("is_used"));
+					otpDetailsEntity.setIsDelete(rs.getBoolean("is_delete"));
+					otpDetailsEntity.setIsExpired(rs.getBoolean("is_expired"));
+				}
+				
+				return otpDetailsEntity;
+			}
+		};
+		queryManager
+				.setParam(otpId);
+		
+		return queryManager.getResultFromSelection();
+	}
 }

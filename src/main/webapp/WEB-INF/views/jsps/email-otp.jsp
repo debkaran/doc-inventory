@@ -39,11 +39,13 @@
 	      <%
 	      	String userId = (String) request.getAttribute("userId");
     		String sourcePage = (String) request.getAttribute("sourcePage");
-    		String eUId = (String) request.getAttribute("eUId"); 
+    		String eUId = (String) request.getAttribute("eUId");
+    		String oId = (String) request.getAttribute("oId");
 	      %>
       	<input type="hidden" name="userId" id="userId" value="<%=userId %>" />
       	<input type="hidden" name="sourcePage" id="sourcePage" value="<%=sourcePage %>" />
       	<input type="hidden" name="eUId" value="<%=eUId %>" />
+      	<input type="hidden" name="oId" value="<%=oId %>" />
         <div class="input-group mb-3">
           <input type="text" name="otp" class="form-control" placeholder="Enter your OTP">
           <div class="input-group-append">

@@ -30,6 +30,7 @@ public class EmailOTPController extends HttpServlet {
 			throws ServletException, IOException {
 		String encUserId = request.getParameter("eUId");
 		String sourcePage = request.getParameter("srcP");
+		String oId = request.getParameter("oId");
 		
 		try {
 			if (sourcePage == null) {
@@ -39,12 +40,16 @@ public class EmailOTPController extends HttpServlet {
 				throw new IllegalArgumentException("Wrong source page.");
 			}
 
+			String otpId = AES256.decrypt(oId);
+			// validate OTP is used
+			registrationService.isOtpUsed(Integer.valueOf(otpId));
 			String userId = AES256.decrypt(encUserId);
 			UserDTO userDetails = registrationService.getUserDetailsByUserId(userId);
 			request.setAttribute("sourcePage", sourcePage);
 			request.setAttribute("userId", userId);
 			request.setAttribute("eUId", encUserId);
 			request.setAttribute("userEmail", userDetails.getEmail());
+			request.setAttribute("oId", oId);
 			if(this.errorMsg != null){
 				request.setAttribute("errorMessage", this.errorMsg);
 				this.errorMsg = null;
@@ -65,6 +70,7 @@ public class EmailOTPController extends HttpServlet {
 		String sourcePage = request.getParameter("sourcePage");
 		String otp = request.getParameter("otp");
 		String eUId = request.getParameter("eUId");
+		String oId = (String) request.getParameter("oId");
 		UserOTPDto otpDto = new UserOTPDto();
 		otpDto.setUserId(Integer.parseInt(userId));
 		otpDto.setSourcePage(sourcePage);
@@ -77,12 +83,12 @@ public class EmailOTPController extends HttpServlet {
 			} else{
 				this.errorMsg = "Somthing went wrong";
 				response.sendRedirect(
-						"." + URIConstant.EMAIL_OTP + "?eUId=" + StringUtils.uriEncodeValue(eUId) + "&srcP=" + sourcePage);
+						"." + URIConstant.EMAIL_OTP + "?eUId=" + StringUtils.uriEncodeValue(eUId) + "&srcP=" + sourcePage + "&oId=" + StringUtils.uriEncodeValue(oId));
 			}
 		} catch (RuntimeException ex) {
 			this.errorMsg = ex.getMessage();
 			response.sendRedirect(
-					"." + URIConstant.EMAIL_OTP + "?eUId=" + StringUtils.uriEncodeValue(eUId) + "&srcP=" + sourcePage);
+					"." + URIConstant.EMAIL_OTP + "?eUId=" + StringUtils.uriEncodeValue(eUId) + "&srcP=" + sourcePage + "&oId=" + StringUtils.uriEncodeValue(oId));
 		}
 
 	}

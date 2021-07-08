@@ -14,4 +14,6 @@ public interface UserOTPDetailsDao {
 	UpdateQueryDTO updateUserOTPAsUsed(UserOTPDto otpDto);
 	
 	UpdateQueryDTO deleteUserOTP(UserOTPDto otpDto);
+
+	UserOTPDetailsEntity getUserOTPDetailsById(Integer otpId) throws SQLException;
 }

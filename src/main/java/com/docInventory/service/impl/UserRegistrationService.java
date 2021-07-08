@@ -7,16 +7,14 @@ import java.util.Map;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
-import com.docInventory.constants.OtpConstant;
 import com.docInventory.dao.UserDetailsDao;
 import com.docInventory.dao.UserOTPDetailsDao;
 import com.docInventory.dao.impl.UserDetailsDaoImpl;
 import com.docInventory.dao.impl.UserOTPDetailsDaoImpl;
 import com.docInventory.dto.UserDTO;
 import com.docInventory.entity.UserDetailsEntity;
-import com.docInventory.jdbc.dto.UpdateQueryDTO;
+import com.docInventory.entity.UserOTPDetailsEntity;
 import com.docInventory.util.EmailUtil;
-import com.docInventory.util.RandomString;
 import com.docInventory.util.ServletRequestUtil;
 import com.docInventory.validation.RegistrationValidation;
 
@@ -39,16 +37,12 @@ public class UserRegistrationService {
 		return fromSelection;
 	}
 
-	public void generateOTPForProfileActivation(ServletContext context, Integer userId, String email, String link) {
-		String otp = RandomString.getString(6);
-		UpdateQueryDTO updateQueryDTO = userOTPDetailsDao.insertUserOTP(userId, OtpConstant.REGISTRATION, otp);
-		if (updateQueryDTO != null) {
+	public void generateOTPForProfileActivation(ServletContext context, Integer userId, String email, String link, String otp) {
 			Map<String, String> paramMap = new HashMap<String, String>();
 			paramMap.put("randomString", otp);
 			paramMap.put("link", link);
 			EmailUtil.sendMailWithTemplate(context, email, "doc-inventory Profile Activation", null,
 					"registration-confirmation.html", paramMap);
-		}
 	}
 
 	public UserDTO getUserDetailsByUserId(String userId) {
@@ -71,5 +65,14 @@ public class UserRegistrationService {
 			e.printStackTrace();
 		}
 		return user;
+	}
+	
+	public boolean isOtpUsed(Integer otpId) throws Exception {
+		UserOTPDetailsEntity otpDetailsEntity = userOTPDetailsDao.getUserOTPDetailsById(otpId);
+		if(otpDetailsEntity.getIsUsed()) {
+			throw new IllegalAccessException("OTP is already used");
+		} else {
+			return false;
+		}
 	}
 }

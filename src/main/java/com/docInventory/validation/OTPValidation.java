@@ -49,7 +49,7 @@ public class OTPValidation {
 			UserOTPDetailsEntity userOTPDetails = userOTPDetailsDao
 					.getUserOTPDetailsByUserIdAndSourcePage(String.valueOf(otpDto.getUserId()), otpDto.getSourcePage());
 			if(userOTPDetails == null) {
-				throw new IllegalArgumentException("Invalid User");
+				throw new IllegalArgumentException("Invalid User OTP");
 			}
 			
 			return true;
