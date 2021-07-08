@@ -15,7 +15,7 @@ public class ResendOTPService {
 	private final UserOTPService userOTPService = new UserOTPService();
 	private final UserRegistrationService registrationService = new UserRegistrationService();
 	
-	public boolean validateAndResendOTP(String otpPageUrl, ServletContext context, HttpServletRequest request, UserOTPDto otpDto) {
+	public boolean validateAndResendOTP(StringBuffer otpPageUrl, ServletContext context, HttpServletRequest request, UserOTPDto otpDto) {
 		if(otpValidation.validateResendRequest(otpDto)) {
 			UserDTO userDetails = registrationService.getUserDetailsByUserId(String.valueOf(otpDto.getUserId()));
 			userOTPDetailsDao.deleteUserOTP(otpDto);
