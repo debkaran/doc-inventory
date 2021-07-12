@@ -41,7 +41,7 @@
 					String errorMessage = (String) request.getAttribute("errorMsg");
 					if(errorMessage != null){
 						%>
-						<p style="color: red; font-size: 12px; font-weight: 600;"><%=errorMessage %></p>
+						<p style="color: red;"><%=errorMessage %></p>
 						<%
 					}
 				%>

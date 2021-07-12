@@ -21,8 +21,8 @@ import com.docInventory.dto.UserDTO;
 public class AuthenticationFilter implements Filter {
 	private ServletContext context;
 	private final String[] whiteListedPage = new String[] { URIConstant.LOGIN, URIConstant.REGISTRATION,
-			URIConstant.FORGET_PASSWORD, URIConstant.RECOVER_PASSWORD, URIConstant.PROFILE_IMAGE,
-			URIConstant.EMAIL_OTP, URIConstant.RESEND_OTP, URIConstant.ACTIVATION_SUCCESS};
+			URIConstant.FORGET_PASSWORD, URIConstant.RECOVER_PASSWORD, URIConstant.PROFILE_IMAGE, URIConstant.EMAIL_OTP,
+			URIConstant.RESEND_OTP, URIConstant.ACTIVATION_SUCCESS };
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
@@ -41,7 +41,7 @@ public class AuthenticationFilter implements Filter {
 			boolean checkIfUrlEndWithAnyArrayElement = checkIfUrlEndWithAnyArrayElement(uri, contextPath,
 					this.whiteListedPage);
 			if (checkIfUrlEndWithAnyArrayElement) {
-				chain.doFilter(request, response);
+				allowRedirection(res, req, chain);
 			} else if (session == null && !checkIfUrlEndWithAnyArrayElement) {
 				res.sendRedirect("." + URIConstant.LOGIN);
 			} else {
@@ -50,10 +50,19 @@ public class AuthenticationFilter implements Filter {
 					session.removeAttribute("user");
 					res.sendRedirect("." + URIConstant.LOGIN);
 				} else {
-					chain.doFilter(request, response);
+					allowRedirection(res, req, chain);
 				}
 			}
 		}
+	}
+
+	private void allowRedirection(HttpServletResponse response, HttpServletRequest request, FilterChain chain)
+			throws IOException, ServletException {
+		response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP
+																					// 1.1.
+		response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+		response.setDateHeader("Expires", 0);
+		chain.doFilter(request, response);
 	}
 
 	private boolean checkIfUrlEndWithAnyArrayElement(String uri, String contextPath, String[] urlPatterns) {
