@@ -22,6 +22,12 @@
   		color: #e9ecef;
   		cursor: text;
   	}
+  	.errorText{
+  		color: red;
+  	}
+  	.successText{
+  	 	color: green;
+  	}
   </style>
   <link rel="Shortcut Icon" href="./resources/images/favicon.ico" type="image/x-icon" />
 </head>
@@ -67,7 +73,7 @@
           </div>
         </div>
         <div class="row d-none">
-        	<div class="col-12" style="color: green;" id="resendInfo">&nbsp;</div>
+        	<div class="col-12" id="resendInfo">&nbsp;</div>
         </div>
         <div class="row">
           <div class="col-12" id="errorMessage">
@@ -75,7 +81,7 @@
             	String errorMessage = (String) request.getAttribute("errorMessage");
 				if(errorMessage != null){
 			%>
-					<p style="color: red; font-size: 12px; font-weight: 600;">* <%=errorMessage %></p>
+					<p style="color: red;">* <%=errorMessage %></p>
 			<%
 				}
 			%>

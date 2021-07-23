@@ -156,7 +156,7 @@
 					&nbsp;&nbsp;Settings
 				</a>
 				<div class="dropdown-divider"></div>
-				<a href="#" class="dropdown-item"> <i
+				<a href="#" class="dropdown-item" id="logout"> <i
 					class="fas fa-sign-out-alt"></i> &nbsp;&nbsp;Sign out
 				</a>
 			</div></li>
@@ -254,3 +254,13 @@
 	padding-left: 10px;
 }
 </style>
+<script type="text/javascript">
+document.getElementById("logout").addEventListener("click", logout);
+function logout(){
+	var form = document.createElement('form');
+    document.body.appendChild(form);
+    form.method = 'post';
+    form.action = "./logout";
+    form.submit();
+}
+</script>

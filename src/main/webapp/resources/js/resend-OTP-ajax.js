@@ -7,16 +7,23 @@ function resendOTP(){
 		ahrefState.enableHref();
 		if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200){
 			console.log(xhr.responseText);
+			let resendInfo = document.getElementById("resendInfo");
+			resendInfo.parentNode.classList.remove("d-none");
+			
 			if(xhr.responseText == "Success"){
-				let resendInfo = document.getElementById("resendInfo");
-				resendInfo.parentNode.classList.remove("d-none");
+				resendInfo.classList.remove("errorText");
+				resendInfo.classList.add("successText");
 				resendInfo.innerHTML = "* New OTP is Generated and sent to your emailId";
 			} else {
-				
+				resendInfo.classList.remove("successText");
+				resendInfo.classList.add("errorText");
+				resendInfo.innerHTML = "* " + xhr.responseText;
 			}
 		}
 		else{
-			console.log("Problem Occured");
+			resendInfo.classList.remove("successText");
+			resendInfo.classList.add("errorText");
+			resendInfo.innerHTML = "* Problem Occured";
 		}
 	};
 	var userId = encodeURIComponent(document.getElementById("userId").value);
