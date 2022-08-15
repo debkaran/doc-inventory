@@ -24,9 +24,9 @@
     <div class="card-body login-card-body">
       <p class="login-box-msg">You forgot your password? Here you can easily retrieve a new password.</p>
 
-      <form action="./forget-password"" method="post">
+      <form action="./forget-password" method="post">
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email">
+          <input type="email" name="email" class="form-control" placeholder="Email" required />
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -37,6 +37,17 @@
           <div class="col-12">
             <button  type="submit" class="btn btn-primary btn-block">Request new password</button>
           </div>
+          <div class="col-12" id="errorMessage">
+            <% 
+            	String errorMessage = (String) request.getAttribute("errorMessage");
+				if(errorMessage != null){
+			%>
+					<p style="color: red;">* <%=errorMessage %></p>
+			<%
+				}
+			%>
+          </div>
+          <!-- /.col -->
           <div class="col-12">
             <b>&lt;</b> Back to <a href = "./">login</a>
           </div>

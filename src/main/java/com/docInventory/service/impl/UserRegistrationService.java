@@ -69,7 +69,7 @@ public class UserRegistrationService {
 	
 	public boolean isOtpUsed(Integer otpId) throws Exception {
 		UserOTPDetailsEntity otpDetailsEntity = userOTPDetailsDao.getUserOTPDetailsById(otpId);
-		if(otpDetailsEntity.getIsUsed()) {
+		if(otpDetailsEntity.getIsUsed()  || otpDetailsEntity.getIsDelete()) {
 			throw new IllegalAccessException("OTP is already used");
 		} else {
 			return false;

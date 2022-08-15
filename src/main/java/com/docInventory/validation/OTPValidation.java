@@ -2,6 +2,7 @@ package com.docInventory.validation;
 
 import java.sql.SQLException;
 
+import com.docInventory.constants.OtpConstant;
 import com.docInventory.dao.UserOTPDetailsDao;
 import com.docInventory.dao.impl.UserOTPDetailsDaoImpl;
 import com.docInventory.dto.UserOTPDto;
@@ -49,7 +50,14 @@ public class OTPValidation {
 			UserOTPDetailsEntity userOTPDetails = userOTPDetailsDao
 					.getUserOTPDetailsByUserIdAndSourcePage(String.valueOf(otpDto.getUserId()), otpDto.getSourcePage());
 			if(userOTPDetails == null) {
-				throw new IllegalArgumentException("Invalid User OTP");
+				if(otpDto.getSourcePage().equals(OtpConstant.REGISTRATION)) {
+					//If source page is registration
+					throw new IllegalArgumentException("User is already created");
+				} else {
+					//If source page is forget password
+					throw new IllegalArgumentException("OTP is already verified");
+				}
+				
 			}
 			
 			return true;

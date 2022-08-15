@@ -9,11 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.docInventory.constants.OtpConstant;
 import com.docInventory.constants.URIConstant;
+import com.docInventory.dto.UserDTO;
+import com.docInventory.service.impl.LoginService;
+import com.docInventory.service.impl.UserOTPService;
+import com.docInventory.util.AES256;
+import com.docInventory.util.StringUtils;
 
 @WebServlet(URIConstant.FORGET_PASSWORD)
 public class ForgetPasswordController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private final LoginService loginService = new LoginService();
+	private final UserOTPService userOTPService = new UserOTPService();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -23,7 +31,20 @@ public class ForgetPasswordController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		response.sendRedirect("." + URIConstant.EMAIL_OTP);
+		try {
+			String email = request.getParameter("email");
+			UserDTO user = loginService.getUserDetailsByEmailid(email);
+			String userId = String.valueOf(user.getId());
+			String encryptedID = AES256.encrypt(userId);
+			StringBuffer otpPageUrlBuilder = new StringBuffer(URIConstant.EMAIL_OTP);
+			otpPageUrlBuilder.append("?eUId=").append(StringUtils.uriEncodeValue(encryptedID))
+					.append("&srcP=" + OtpConstant.FORGET_PASSWORD);
+			userOTPService.sendOtpToEmail(otpPageUrlBuilder, getServletContext(), request, user);
+			response.sendRedirect("." + otpPageUrlBuilder.toString());
+		} catch (Exception e) {
+			request.setAttribute("errorMessage", e.getMessage());
+			doGet(request, response);
+		}
+		
 	}
 }

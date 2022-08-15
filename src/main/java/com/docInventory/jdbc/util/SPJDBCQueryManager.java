@@ -22,7 +22,7 @@ public class SPJDBCQueryManager extends ParamBuilder {
 
 	public void setQuery(String query) {
 		this.query = query;
-		this.setParams(new ArrayList<>());
+		this.setParams(new ArrayList<SqlParamDTO>());
 		this.setOutParamTypes(new int[] {});
 	}
 
@@ -42,7 +42,7 @@ public class SPJDBCQueryManager extends ParamBuilder {
 				determineObjectAndSetType(connObj, cStmtObj, i + 1, param);
 			}
 		}
-		this.setParams(new ArrayList<>());
+		this.setParams(new ArrayList<SqlParamDTO>());
 
 		int[] outParamTypes = this.getOutParamTypes();
 		if (outParamTypes != null) {

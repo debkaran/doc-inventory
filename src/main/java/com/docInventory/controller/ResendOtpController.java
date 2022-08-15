@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.docInventory.constants.OtpConstant;
 import com.docInventory.constants.URIConstant;
 import com.docInventory.dto.UserOTPDto;
 import com.docInventory.service.impl.ResendOTPService;
@@ -28,7 +27,7 @@ public class ResendOtpController extends HttpServlet {
 			String encryptedID = AES256.encrypt(userId);
 			StringBuffer otpPageUrlBuilder = new StringBuffer(URIConstant.EMAIL_OTP);
 			otpPageUrlBuilder.append("?eUId=").append(StringUtils.uriEncodeValue(encryptedID))
-					.append("&srcP=" + OtpConstant.REGISTRATION);
+					.append("&srcP=" + sourcePage);
 			UserOTPDto otpDto = new UserOTPDto();
 			otpDto.setUserId(Integer.valueOf(userId));
 			otpDto.setSourcePage(sourcePage);

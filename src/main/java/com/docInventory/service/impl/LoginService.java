@@ -41,6 +41,29 @@ public class LoginService {
 		return user;
 	}
 	
+	public UserDTO getUserDetailsByEmailid(String email) {
+		UserDTO user = null;
+		try {
+			UserDetailsEntity userDetailsEntity = userDetailsDao.getUserByEmail(email);
+			if(userDetailsEntity != null) {
+				user = new UserDTO();
+				user.setId(userDetailsEntity.getId());
+				user.setName(userDetailsEntity.getName());
+				user.setRole(userDetailsEntity.getRole());
+				user.setProfilePicture(userDetailsEntity.getProfilePicture());
+				user.setStorageSpace(userDetailsEntity.getStorageSpace());
+				user.setDateOfBirth(userDetailsEntity.getDob());
+				user.setCreatedDate(userDetailsEntity.getCreatedDate());
+				user.setLastLoginTime(userDetailsEntity.getLastLoginTime());
+			} else {
+				throw new IllegalStateException("This account is not exist");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return user;
+	}
+	
 	public void updateFailureLogin(boolean isFailure, Integer userId) {
 		if(isFailure == true) {
 			userDetailsDao.updateOnFailureLogin(userId);

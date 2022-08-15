@@ -22,7 +22,7 @@ public class JDBCQueryManager extends ParamBuilder {
 
 	public void setQuery(String query) {
 		this.query = query;
-		this.setParams(new ArrayList<>());
+		this.setParams(new ArrayList<SqlParamDTO>());
 		this.setOutParamTypes(new int[] {});
 	}
 
@@ -42,7 +42,7 @@ public class JDBCQueryManager extends ParamBuilder {
 			}
 		}
 		
-		this.setParams(new ArrayList<>());
+		this.setParams(new ArrayList<SqlParamDTO>());
 	}
 
 	protected PreparedStatement getPreparedStatement(Connection connObj, boolean isSelectQuery) throws SQLException {

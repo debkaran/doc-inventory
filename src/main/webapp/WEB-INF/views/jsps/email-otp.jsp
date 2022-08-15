@@ -53,7 +53,7 @@
       	<input type="hidden" name="eUId" value="<%=eUId %>" />
       	<input type="hidden" name="oId" value="<%=oId %>" />
         <div class="input-group mb-3">
-          <input type="text" name="otp" class="form-control" placeholder="Enter your OTP">
+          <input type="text" name="otp" class="form-control" placeholder="Enter your OTP" />
           <div class="input-group-append">
             <div class="input-group-text">
             </div>

@@ -41,8 +41,12 @@ public class EmailOTPController extends HttpServlet {
 			}
 
 			String otpId = AES256.decrypt(oId);
-			// validate OTP is used
-			registrationService.isOtpUsed(Integer.valueOf(otpId));
+			try {
+				// validate OTP is used
+				registrationService.isOtpUsed(Integer.valueOf(otpId));
+			} catch(IllegalAccessException ex) {
+				this.errorMsg = ex.getMessage();
+			}
 			String userId = AES256.decrypt(encUserId);
 			UserDTO userDetails = registrationService.getUserDetailsByUserId(userId);
 			request.setAttribute("sourcePage", sourcePage);
