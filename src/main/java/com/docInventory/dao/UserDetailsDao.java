@@ -16,6 +16,8 @@ public interface UserDetailsDao {
 	UpdateQueryDTO activateUser(Integer userId);
 	
 	UpdateQueryDTO updateOnFailureLogin(Integer userId);
-	
+	 
 	UpdateQueryDTO updateOnSuccessLogin(Integer userId);
+
+	UpdateQueryDTO updateOnPassword(Integer userId, String password);
 }

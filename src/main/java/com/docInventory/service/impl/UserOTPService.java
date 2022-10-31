@@ -3,7 +3,6 @@ package com.docInventory.service.impl;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
-import com.docInventory.constants.OtpConstant;
 import com.docInventory.dao.UserDetailsDao;
 import com.docInventory.dao.UserOTPDetailsDao;
 import com.docInventory.dao.impl.UserDetailsDaoImpl;
@@ -38,11 +37,13 @@ public class UserOTPService {
 		return false;
 	}
 
-	public boolean sendOtpToEmail(StringBuffer otpPageUrlBuilder, ServletContext context, HttpServletRequest request, UserDTO user) {
+	public boolean sendOtpToEmail(StringBuffer otpPageUrlBuilder, ServletContext context, HttpServletRequest request,
+			UserDTO user, String sourcePage) {
 		try {
 			String otp = RandomString.getString(6);
-			UpdateQueryDTO updateQueryDTO = userOTPDetailsDao.insertUserOTP(user.getId(), OtpConstant.REGISTRATION, otp);
-			if(updateQueryDTO != null) {
+			UpdateQueryDTO updateQueryDTO = userOTPDetailsDao.insertUserOTP(user.getId(), sourcePage,
+					otp);
+			if (updateQueryDTO != null) {
 				String encryptedID = AES256.encrypt(updateQueryDTO.getLastGeneretedId());
 				otpPageUrlBuilder.append("&oId=" + StringUtils.uriEncodeValue(encryptedID));
 				String activationLink = ServletRequestUtil.getTotalRootUrl(request) + otpPageUrlBuilder.toString();
@@ -51,14 +52,14 @@ public class UserOTPService {
 					@Override
 					public void run() {
 						registrationService.generateOTPForProfileActivation(context, user.getId(), user.getEmail(),
-								activationLink, otp);
+								activationLink, otp, sourcePage);
 					}
 				}.start();
 				return true;
 			} else {
 				return false;
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

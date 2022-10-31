@@ -63,7 +63,7 @@ public class RegistrationController extends HttpServlet {
 					otpPageUrlBuilder.append("?eUId=").append(StringUtils.uriEncodeValue(encryptedID))
 							.append("&srcP=" + OtpConstant.REGISTRATION);
 					user.setId(lastRegistrationId);
-					userOTPService.sendOtpToEmail(otpPageUrlBuilder, getServletContext(), request, user);
+					userOTPService.sendOtpToEmail(otpPageUrlBuilder, getServletContext(), request, user, OtpConstant.REGISTRATION);
 					response.sendRedirect("." + otpPageUrlBuilder.toString());
 				} else {
 					request.setAttribute("errorMsg", "Something went wrong");

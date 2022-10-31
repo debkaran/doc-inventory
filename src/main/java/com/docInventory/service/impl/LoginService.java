@@ -48,6 +48,7 @@ public class LoginService {
 			if(userDetailsEntity != null) {
 				user = new UserDTO();
 				user.setId(userDetailsEntity.getId());
+				user.setEmail(email);
 				user.setName(userDetailsEntity.getName());
 				user.setRole(userDetailsEntity.getRole());
 				user.setProfilePicture(userDetailsEntity.getProfilePicture());

@@ -31,7 +31,7 @@ public class ResendOtpController extends HttpServlet {
 			UserOTPDto otpDto = new UserOTPDto();
 			otpDto.setUserId(Integer.valueOf(userId));
 			otpDto.setSourcePage(sourcePage);
-			resendOTPService.validateAndResendOTP(otpPageUrlBuilder, getServletContext(), request, otpDto);
+			resendOTPService.validateAndResendOTP(otpPageUrlBuilder, getServletContext(), request, otpDto, sourcePage);
 			response.getWriter().write("Success");
 		} catch (Exception e) {
 			response.getWriter().write("Error: "+e.getMessage());

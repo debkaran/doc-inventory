@@ -83,7 +83,13 @@ public class EmailOTPController extends HttpServlet {
 		try {
 			boolean isValid = userOTPService.validateUserOtp(otpDto);
 			if(isValid) {
-				response.sendRedirect("." + URIConstant.ACTIVATION_SUCCESS);
+				if(sourcePage.equals(OtpConstant.REGISTRATION)) {
+					//for registration
+					response.sendRedirect("." + URIConstant.ACTIVATION_SUCCESS);
+				} else {
+					//forget password
+					response.sendRedirect("." + URIConstant.RECOVER_PASSWORD+ "?eUId=" + StringUtils.uriEncodeValue(eUId));
+				}
 			} else{
 				this.errorMsg = "Somthing went wrong";
 				response.sendRedirect(
@@ -94,7 +100,5 @@ public class EmailOTPController extends HttpServlet {
 			response.sendRedirect(
 					"." + URIConstant.EMAIL_OTP + "?eUId=" + StringUtils.uriEncodeValue(eUId) + "&srcP=" + sourcePage + "&oId=" + StringUtils.uriEncodeValue(oId));
 		}
-
 	}
-
 }

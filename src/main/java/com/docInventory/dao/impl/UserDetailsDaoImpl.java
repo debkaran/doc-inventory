@@ -113,4 +113,14 @@ public class UserDetailsDaoImpl implements UserDetailsDao {
 		UpdateQueryDTO updateQueryDTO = qManager.getExecute(true);
 		return updateQueryDTO;
 	}
+	
+	@Override
+	public UpdateQueryDTO updateOnPassword(Integer userId, String password) {
+		String query = "update user_details set password = ? where id = ?";
+		UpdateQueryManager qManager = UpdateQueryManager.getUpdateQueryManagerInstance(query);
+		qManager.setParam(password);
+		qManager.setParam(userId);
+		UpdateQueryDTO updateQueryDTO = qManager.getExecute(true);
+		return updateQueryDTO;
+	}
 }
